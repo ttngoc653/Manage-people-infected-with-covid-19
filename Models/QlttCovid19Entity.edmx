@@ -1,0 +1,558 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QlttCovid19Entity.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProvinceId" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="IsPublished" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="LichSuHoatDong">
+          <Key>
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="ThoiGian" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ThoiGian" Type="datetime" Nullable="false" />
+          <Property Name="HanhDong" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LichSuTinhTrangNhiem">
+          <Key>
+            <PropertyRef Name="Cmnd" />
+            <PropertyRef Name="ThoiGianCapNhat" />
+          </Key>
+          <Property Name="Cmnd" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="TinhTrang" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="ThoiGianCapNhat" Type="datetime" Nullable="false" />
+          <Property Name="LaHienTai" Type="bit" Nullable="false" />
+          <Property Name="NoiCachLy" Type="int" />
+        </EntityType>
+        <EntityType Name="NguoiLienQuan">
+          <Key>
+            <PropertyRef Name="Cmnd" />
+          </Key>
+          <Property Name="HoTen" Type="nvarchar" MaxLength="255" />
+          <Property Name="Cmnd" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="NamSinh" Type="smallint" />
+          <Property Name="SoNhaDuong" Type="nvarchar" MaxLength="255" />
+          <Property Name="PhuongXa" Type="int" />
+          <Property Name="NguoiLay" Type="nvarchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="NoiDieuTriCachLy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SucChua" Type="int" Nullable="false" />
+          <Property Name="SoLuongHienTaiTiepNhan" Type="int" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="20" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="IsPublished" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="TaiKhoan">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Role" Type="int" Nullable="false" />
+          <Property Name="HasLock" Type="bit" />
+        </EntityType>
+        <EntityType Name="Ward">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="DistrictID" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="IsPublished" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <Association Name="FK__NguoiLien__Nguoi__1273C1CD">
+          <End Role="NguoiLienQuan" Type="Self.NguoiLienQuan" Multiplicity="0..1" />
+          <End Role="NguoiLienQuan1" Type="Self.NguoiLienQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiLienQuan">
+              <PropertyRef Name="Cmnd" />
+            </Principal>
+            <Dependent Role="NguoiLienQuan1">
+              <PropertyRef Name="NguoiLay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_District_Province">
+          <End Role="Province" Type="Self.Province" Multiplicity="1" />
+          <End Role="District" Type="Self.District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LichSuHoatDong_TaiKhoan">
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+          <End Role="LichSuHoatDong" Type="Self.LichSuHoatDong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaiKhoan">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="LichSuHoatDong">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LichSuTinhTrangNhiem_NguoiLienQuan">
+          <End Role="NguoiLienQuan" Type="Self.NguoiLienQuan" Multiplicity="1" />
+          <End Role="LichSuTinhTrangNhiem" Type="Self.LichSuTinhTrangNhiem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiLienQuan">
+              <PropertyRef Name="Cmnd" />
+            </Principal>
+            <Dependent Role="LichSuTinhTrangNhiem">
+              <PropertyRef Name="Cmnd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LichSuTinhTrangNhiem_NoiDieuTriCachLy">
+          <End Role="NoiDieuTriCachLy" Type="Self.NoiDieuTriCachLy" Multiplicity="0..1" />
+          <End Role="LichSuTinhTrangNhiem" Type="Self.LichSuTinhTrangNhiem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NoiDieuTriCachLy">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LichSuTinhTrangNhiem">
+              <PropertyRef Name="NoiCachLy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLienQuan_Ward">
+          <End Role="Ward" Type="Self.Ward" Multiplicity="0..1" />
+          <End Role="NguoiLienQuan" Type="Self.NguoiLienQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ward">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NguoiLienQuan">
+              <PropertyRef Name="PhuongXa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ward_District">
+          <End Role="District" Type="Self.District" Multiplicity="1" />
+          <End Role="Ward" Type="Self.Ward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ward">
+              <PropertyRef Name="DistrictID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QlttCovid19EntityStoreContainer">
+          <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LichSuHoatDong" EntityType="Self.LichSuHoatDong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LichSuTinhTrangNhiem" EntityType="Self.LichSuTinhTrangNhiem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NguoiLienQuan" EntityType="Self.NguoiLienQuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NoiDieuTriCachLy" EntityType="Self.NoiDieuTriCachLy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__NguoiLien__Nguoi__1273C1CD" Association="Self.FK__NguoiLien__Nguoi__1273C1CD">
+            <End Role="NguoiLienQuan" EntitySet="NguoiLienQuan" />
+            <End Role="NguoiLienQuan1" EntitySet="NguoiLienQuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_District_Province" Association="Self.FK_District_Province">
+            <End Role="Province" EntitySet="Province" />
+            <End Role="District" EntitySet="District" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LichSuHoatDong_TaiKhoan" Association="Self.FK_LichSuHoatDong_TaiKhoan">
+            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+            <End Role="LichSuHoatDong" EntitySet="LichSuHoatDong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LichSuTinhTrangNhiem_NguoiLienQuan" Association="Self.FK_LichSuTinhTrangNhiem_NguoiLienQuan">
+            <End Role="NguoiLienQuan" EntitySet="NguoiLienQuan" />
+            <End Role="LichSuTinhTrangNhiem" EntitySet="LichSuTinhTrangNhiem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LichSuTinhTrangNhiem_NoiDieuTriCachLy" Association="Self.FK_LichSuTinhTrangNhiem_NoiDieuTriCachLy">
+            <End Role="NoiDieuTriCachLy" EntitySet="NoiDieuTriCachLy" />
+            <End Role="LichSuTinhTrangNhiem" EntitySet="LichSuTinhTrangNhiem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLienQuan_Ward" Association="Self.FK_NguoiLienQuan_Ward">
+            <End Role="Ward" EntitySet="Ward" />
+            <End Role="NguoiLienQuan" EntitySet="NguoiLienQuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ward_District" Association="Self.FK_Ward_District">
+            <End Role="District" EntitySet="District" />
+            <End Role="Ward" EntitySet="Ward" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QlttCovid19Entity" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="IsPublished" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Province" Relationship="Self.FK_District_Province" FromRole="District" ToRole="Province" />
+          <NavigationProperty Name="Wards" Relationship="Self.FK_Ward_District" FromRole="District" ToRole="Ward" />
+        </EntityType>
+        <EntityType Name="LichSuHoatDong">
+          <Key>
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="ThoiGian" />
+          </Key>
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ThoiGian" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HanhDong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_LichSuHoatDong_TaiKhoan" FromRole="LichSuHoatDong" ToRole="TaiKhoan" />
+        </EntityType>
+        <EntityType Name="LichSuTinhTrangNhiem">
+          <Key>
+            <PropertyRef Name="Cmnd" />
+            <PropertyRef Name="ThoiGianCapNhat" />
+          </Key>
+          <Property Name="Cmnd" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TinhTrang" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ThoiGianCapNhat" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LaHienTai" Type="Boolean" Nullable="false" />
+          <Property Name="NoiCachLy" Type="Int32" />
+          <NavigationProperty Name="NguoiLienQuan" Relationship="Self.FK_LichSuTinhTrangNhiem_NguoiLienQuan" FromRole="LichSuTinhTrangNhiem" ToRole="NguoiLienQuan" />
+          <NavigationProperty Name="NoiDieuTriCachLy" Relationship="Self.FK_LichSuTinhTrangNhiem_NoiDieuTriCachLy" FromRole="LichSuTinhTrangNhiem" ToRole="NoiDieuTriCachLy" />
+        </EntityType>
+        <EntityType Name="NguoiLienQuan">
+          <Key>
+            <PropertyRef Name="Cmnd" />
+          </Key>
+          <Property Name="HoTen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Cmnd" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NamSinh" Type="Int16" />
+          <Property Name="SoNhaDuong" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PhuongXa" Type="Int32" />
+          <Property Name="NguoiLay" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LichSuTinhTrangNhiems" Relationship="Self.FK_LichSuTinhTrangNhiem_NguoiLienQuan" FromRole="NguoiLienQuan" ToRole="LichSuTinhTrangNhiem" />
+          <NavigationProperty Name="NguoiLienQuan1" Relationship="Self.FK__NguoiLien__Nguoi__1273C1CD" FromRole="NguoiLienQuan" ToRole="NguoiLienQuan1" />
+          <NavigationProperty Name="NguoiLienQuan2" Relationship="Self.FK__NguoiLien__Nguoi__1273C1CD" FromRole="NguoiLienQuan1" ToRole="NguoiLienQuan" />
+          <NavigationProperty Name="Ward" Relationship="Self.FK_NguoiLienQuan_Ward" FromRole="NguoiLienQuan" ToRole="Ward" />
+        </EntityType>
+        <EntityType Name="NoiDieuTriCachLy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SucChua" Type="Int32" Nullable="false" />
+          <Property Name="SoLuongHienTaiTiepNhan" Type="Int32" />
+          <NavigationProperty Name="LichSuTinhTrangNhiems" Relationship="Self.FK_LichSuTinhTrangNhiem_NoiDieuTriCachLy" FromRole="NoiDieuTriCachLy" ToRole="LichSuTinhTrangNhiem" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="IsPublished" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Districts" Relationship="Self.FK_District_Province" FromRole="Province" ToRole="District" />
+        </EntityType>
+        <EntityType Name="TaiKhoan">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="Int32" Nullable="false" />
+          <Property Name="HasLock" Type="Boolean" />
+          <NavigationProperty Name="LichSuHoatDongs" Relationship="Self.FK_LichSuHoatDong_TaiKhoan" FromRole="TaiKhoan" ToRole="LichSuHoatDong" />
+        </EntityType>
+        <EntityType Name="Ward">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DistrictID" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="IsPublished" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="District" Relationship="Self.FK_Ward_District" FromRole="Ward" ToRole="District" />
+          <NavigationProperty Name="NguoiLienQuans" Relationship="Self.FK_NguoiLienQuan_Ward" FromRole="Ward" ToRole="NguoiLienQuan" />
+        </EntityType>
+        <Association Name="FK_District_Province">
+          <End Role="Province" Type="Self.Province" Multiplicity="1" />
+          <End Role="District" Type="Self.District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ward_District">
+          <End Role="District" Type="Self.District" Multiplicity="1" />
+          <End Role="Ward" Type="Self.Ward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ward">
+              <PropertyRef Name="DistrictID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LichSuHoatDong_TaiKhoan">
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+          <End Role="LichSuHoatDong" Type="Self.LichSuHoatDong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaiKhoan">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="LichSuHoatDong">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LichSuTinhTrangNhiem_NguoiLienQuan">
+          <End Role="NguoiLienQuan" Type="Self.NguoiLienQuan" Multiplicity="1" />
+          <End Role="LichSuTinhTrangNhiem" Type="Self.LichSuTinhTrangNhiem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiLienQuan">
+              <PropertyRef Name="Cmnd" />
+            </Principal>
+            <Dependent Role="LichSuTinhTrangNhiem">
+              <PropertyRef Name="Cmnd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LichSuTinhTrangNhiem_NoiDieuTriCachLy">
+          <End Role="NoiDieuTriCachLy" Type="Self.NoiDieuTriCachLy" Multiplicity="0..1" />
+          <End Role="LichSuTinhTrangNhiem" Type="Self.LichSuTinhTrangNhiem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NoiDieuTriCachLy">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LichSuTinhTrangNhiem">
+              <PropertyRef Name="NoiCachLy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NguoiLien__Nguoi__1273C1CD">
+          <End Role="NguoiLienQuan" Type="Self.NguoiLienQuan" Multiplicity="0..1" />
+          <End Role="NguoiLienQuan1" Type="Self.NguoiLienQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NguoiLienQuan">
+              <PropertyRef Name="Cmnd" />
+            </Principal>
+            <Dependent Role="NguoiLienQuan1">
+              <PropertyRef Name="NguoiLay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NguoiLienQuan_Ward">
+          <End Role="Ward" Type="Self.Ward" Multiplicity="0..1" />
+          <End Role="NguoiLienQuan" Type="Self.NguoiLienQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ward">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NguoiLienQuan">
+              <PropertyRef Name="PhuongXa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLTTCovid19Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Districts" EntityType="Self.District" />
+          <EntitySet Name="LichSuHoatDongs" EntityType="Self.LichSuHoatDong" />
+          <EntitySet Name="LichSuTinhTrangNhiems" EntityType="Self.LichSuTinhTrangNhiem" />
+          <EntitySet Name="NguoiLienQuans" EntityType="Self.NguoiLienQuan" />
+          <EntitySet Name="NoiDieuTriCachLies" EntityType="Self.NoiDieuTriCachLy" />
+          <EntitySet Name="Provinces" EntityType="Self.Province" />
+          <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
+          <EntitySet Name="Wards" EntityType="Self.Ward" />
+          <AssociationSet Name="FK_District_Province" Association="Self.FK_District_Province">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="District" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ward_District" Association="Self.FK_Ward_District">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="Ward" EntitySet="Wards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LichSuHoatDong_TaiKhoan" Association="Self.FK_LichSuHoatDong_TaiKhoan">
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+            <End Role="LichSuHoatDong" EntitySet="LichSuHoatDongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LichSuTinhTrangNhiem_NguoiLienQuan" Association="Self.FK_LichSuTinhTrangNhiem_NguoiLienQuan">
+            <End Role="NguoiLienQuan" EntitySet="NguoiLienQuans" />
+            <End Role="LichSuTinhTrangNhiem" EntitySet="LichSuTinhTrangNhiems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LichSuTinhTrangNhiem_NoiDieuTriCachLy" Association="Self.FK_LichSuTinhTrangNhiem_NoiDieuTriCachLy">
+            <End Role="NoiDieuTriCachLy" EntitySet="NoiDieuTriCachLies" />
+            <End Role="LichSuTinhTrangNhiem" EntitySet="LichSuTinhTrangNhiems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NguoiLien__Nguoi__1273C1CD" Association="Self.FK__NguoiLien__Nguoi__1273C1CD">
+            <End Role="NguoiLienQuan" EntitySet="NguoiLienQuans" />
+            <End Role="NguoiLienQuan1" EntitySet="NguoiLienQuans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NguoiLienQuan_Ward" Association="Self.FK_NguoiLienQuan_Ward">
+            <End Role="Ward" EntitySet="Wards" />
+            <End Role="NguoiLienQuan" EntitySet="NguoiLienQuans" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QlttCovid19EntityStoreContainer" CdmEntityContainer="QLTTCovid19Entities">
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="QlttCovid19Entity.District">
+              <MappingFragment StoreEntitySet="District">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LichSuHoatDongs">
+            <EntityTypeMapping TypeName="QlttCovid19Entity.LichSuHoatDong">
+              <MappingFragment StoreEntitySet="LichSuHoatDong">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
+                <ScalarProperty Name="HanhDong" ColumnName="HanhDong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LichSuTinhTrangNhiems">
+            <EntityTypeMapping TypeName="QlttCovid19Entity.LichSuTinhTrangNhiem">
+              <MappingFragment StoreEntitySet="LichSuTinhTrangNhiem">
+                <ScalarProperty Name="Cmnd" ColumnName="Cmnd" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+                <ScalarProperty Name="ThoiGianCapNhat" ColumnName="ThoiGianCapNhat" />
+                <ScalarProperty Name="LaHienTai" ColumnName="LaHienTai" />
+                <ScalarProperty Name="NoiCachLy" ColumnName="NoiCachLy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NguoiLienQuans">
+            <EntityTypeMapping TypeName="QlttCovid19Entity.NguoiLienQuan">
+              <MappingFragment StoreEntitySet="NguoiLienQuan">
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="Cmnd" ColumnName="Cmnd" />
+                <ScalarProperty Name="NamSinh" ColumnName="NamSinh" />
+                <ScalarProperty Name="SoNhaDuong" ColumnName="SoNhaDuong" />
+                <ScalarProperty Name="PhuongXa" ColumnName="PhuongXa" />
+                <ScalarProperty Name="NguoiLay" ColumnName="NguoiLay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NoiDieuTriCachLies">
+            <EntityTypeMapping TypeName="QlttCovid19Entity.NoiDieuTriCachLy">
+              <MappingFragment StoreEntitySet="NoiDieuTriCachLy">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="SucChua" ColumnName="SucChua" />
+                <ScalarProperty Name="SoLuongHienTaiTiepNhan" ColumnName="SoLuongHienTaiTiepNhan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provinces">
+            <EntityTypeMapping TypeName="QlttCovid19Entity.Province">
+              <MappingFragment StoreEntitySet="Province">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaiKhoans">
+            <EntityTypeMapping TypeName="QlttCovid19Entity.TaiKhoan">
+              <MappingFragment StoreEntitySet="TaiKhoan">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="HasLock" ColumnName="HasLock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wards">
+            <EntityTypeMapping TypeName="QlttCovid19Entity.Ward">
+              <MappingFragment StoreEntitySet="Ward">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

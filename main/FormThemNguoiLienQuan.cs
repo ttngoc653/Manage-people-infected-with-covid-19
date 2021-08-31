@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,11 +14,12 @@ namespace _1760081.main
 {
     public partial class FormThemNguoiLienQuan : Form
     {
-        private String global_sUserName;
+        private String g_sUserName;
 
-        public FormThemNguoiLienQuan()
+        public FormThemNguoiLienQuan(string sUserName)
         {
             InitializeComponent();
+            g_sUserName = sUserName;
             txtHT.Validating += TxtHT_Validating;
             txtCMND.Validating += TxtCMND_Validating;
             txtNamSinh.Validating += TxtNamSinh_Validating;
@@ -28,14 +30,13 @@ namespace _1760081.main
             comboBoxTT.Validating += ComboBoxTT_Validating;
             cbbNoiDieuTriCachLy.Validating += CbbNoiDieuTriCachLy_Validating;
             cbbNguoiLienQuan.SelectedValueChanged += CbbNguoiLienQuan_SelectedValueChanged;
+            cbbNguoiLienQuan.TextChanged += CbbNguoiLienQuan_TextChanged;
             //comboBoxDiaChi.Validating += ComboBoxDiaChi_Validating;
 
             cbbTinh.SelectedValueChanged += CbbTinh_SelectedValueChanged;
             cbbQuan.SelectedValueChanged += CbbQuan_SelectedValueChanged;
 
             this.Load += Nguoinhiemcovid_Load;
-
-            txtNguoiLienQuan.TextChanged += TxtNguoiLienQuan_TextChanged;
 
             btnAdd.Click += BtnAdd_Click;
         }
@@ -45,30 +46,43 @@ namespace _1760081.main
             Control ctrl = (Control)sender;
             if (ctrl.Text.Length == 0)
             {
-                errorProviderTinhTrang.SetError(ctrl, "Chua chon tinh trang");
+                errorProviderGeneral.SetError(ctrl, "Chua chon tinh trang");
             }
             else
             {
-                errorProviderTinhTrang.SetError(ctrl, "");
+                errorProviderGeneral.SetError(ctrl, "");
             }
         }
 
         private void CbbNguoiLienQuan_SelectedValueChanged(object sender, EventArgs e)
         {
-            txtNguoiLienQuan.Text = cbbNguoiLienQuan.Text.Split(new char[' ']).ElementAt(0);
+            cbbNguoiLienQuan.Text = cbbNguoiLienQuan.Text.Split(new char[' ']).ElementAt(0);
         }
 
-        private void TxtNguoiLienQuan_TextChanged(object sender, EventArgs e)
+        private void CbbNguoiLienQuan_TextChanged(object sender, EventArgs e)
         {
-            string sKey = txtNguoiLienQuan.Text;
+            string sKey = cbbNguoiLienQuan.Text.Trim();
             List<String> dsNguoiLay = Controllers.CtrlNguoiLienQuan.TimKiem(sKey);
             cbbNguoiLienQuan.Items.Clear();
             cbbNguoiLienQuan.Items.AddRange(dsNguoiLay.ToArray());
+
             cbbNguoiLienQuan.DroppedDown = true;
+            Cursor.Current = Cursors.Default;
+            cbbNguoiLienQuan.SelectionStart = sKey.Length;
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
+            foreach (Control ctrl in this.Controls)
+            {
+                string sValidate = errorProviderGeneral.GetError (ctrl);
+                if (sValidate.Length != 0)
+                {
+                    MessageBox.Show ("Co thong tin sai. Vui long kiem tra lai thong tin.");
+                    return;
+                }
+            }
+
             try
             {
                 Models.Ward ward = CtrlKhuVuc.LayPhuongXa(cbbPhuong.Text.Trim(), cbbQuan.Text.Trim(), cbbTinh.Text.Trim());
@@ -83,9 +97,9 @@ namespace _1760081.main
                     Ward = ward
                 };
 
-                if (txtNguoiLienQuan.Text.Trim().Length > 0)
+                if (cbbNguoiLienQuan.Text.Trim().Length > 0)
                 {
-                    Models.NguoiLienQuan nguoiLay = CtrlNguoiLienQuan.TimKiemTheoCmnd(txtNguoiLienQuan.Text.Trim());
+                    Models.NguoiLienQuan nguoiLay = CtrlNguoiLienQuan.TimKiemTheoCmnd(cbbNguoiLienQuan.Text.Trim());
 
                     nguoiLienQuan.NguoiLienQuan2 = nguoiLay;
                     nguoiLienQuan.NguoiLay = nguoiLay.Cmnd;
@@ -119,11 +133,11 @@ namespace _1760081.main
             Control ctrl = (Control)sender;
             if (ctrl.Text.Length == 0)
             {
-                errorProviderPhuong.SetError(ctrl, "Chua chon phuong");
+                errorProviderGeneral.SetError(ctrl, "Chua chon phuong");
             }
             else
             {
-                errorProviderPhuong.SetError(ctrl, "");
+                errorProviderGeneral.SetError(ctrl, "");
             }
         }
 
@@ -133,8 +147,6 @@ namespace _1760081.main
             cbbPhuong.Items.Clear();
 
             cbbPhuong.Items.AddRange(Controllers.CtrlKhuVuc.LayDanhSachTenPhuongXa(cbbTinh.Text.Trim(), ctrl.Text.Trim()).ToArray());
-
-            cbbPhuong.SelectedIndex = 0;
         }
 
         private void CbbTinh_SelectedValueChanged(object sender, EventArgs e)
@@ -143,7 +155,6 @@ namespace _1760081.main
             cbbQuan.Items.Clear();
 
             cbbQuan.Items.AddRange(Controllers.CtrlKhuVuc.LayDanhSachTenQuanHuyen(cbbTinh.Text.Trim()).ToArray());
-            cbbQuan.SelectedIndex = 0;
         }
 
         private void CbbQuan_Validating(object sender, CancelEventArgs e)
@@ -151,11 +162,11 @@ namespace _1760081.main
             Control ctrl = (Control)sender;
             if (ctrl.Text.Length == 0)
             {
-                errorProviderSoNhaDuong.SetError(ctrl, "Chua chon quan huyen");
+                errorProviderGeneral.SetError(ctrl, "Chua chon quan huyen");
             }
             else
             {
-                errorProviderSoNhaDuong.SetError(ctrl, "");
+                errorProviderGeneral.SetError(ctrl, "");
             }
         }
 
@@ -164,11 +175,11 @@ namespace _1760081.main
             Control ctrl = (Control)sender;
             if (ctrl.Text.Length == 0)
             {
-                errorProviderSoNhaDuong.SetError(ctrl, "Chua nhap so nha va duong");
+                errorProviderGeneral.SetError(ctrl, "Chua nhap so nha va duong");
             }
             else
             {
-                errorProviderSoNhaDuong.SetError(ctrl, "");
+                errorProviderGeneral.SetError(ctrl, "");
             }
         }
 
@@ -177,11 +188,11 @@ namespace _1760081.main
             Control ctrl = (Control)sender;
             if (ctrl.Text.Length == 0)
             {
-                errorProviderNoiDieuTri.SetError(ctrl, "Chua chon tinh/thanh pho");
+                errorProviderGeneral.SetError(ctrl, "Chua chon tinh/thanh pho");
             }
             else
             {
-                errorProviderNoiDieuTri.SetError(ctrl, "");
+                errorProviderGeneral.SetError(ctrl, "");
             }
         }
 
@@ -201,11 +212,11 @@ namespace _1760081.main
             Control ctrl = (Control)sender;
             if (ctrl.Text.Length==0)
             {
-                errorProviderNoiDieuTri.SetError(ctrl, "Chua chon noi dieu tri");
+                errorProviderGeneral.SetError(ctrl, "Chua chon noi dieu tri");
             }
             else
             {
-                errorProviderNoiDieuTri.SetError(ctrl, "");
+                errorProviderGeneral.SetError(ctrl, "");
             }
         }
 
@@ -215,12 +226,12 @@ namespace _1760081.main
             Control ctrl = (Control)sender;
             if (ctrl.Text.Length == 0)
             {
-                errorProviderHoTen.SetError(ctrl, "Ban phai nhap ho ten.");
+                errorProviderGeneral.SetError(ctrl, "Ban phai nhap ho ten.");
 
             }
             else
             {
-                errorProviderHoTen.SetError(ctrl, "");
+                errorProviderGeneral.SetError(ctrl, "");
             }
 
 
@@ -231,12 +242,15 @@ namespace _1760081.main
             Control ctrl = (Control)sender;
             if (ctrl.Text.Length == 0)
             {
-                errorProviderCMND.SetError(ctrl, "Ban phai nhap cmnd hoac cccd.");
-
+                errorProviderGeneral.SetError(ctrl, "Ban phai nhap cmnd hoac cccd.");
+            }
+            else if (!(new Regex("^(([0-9]{10})|([0-9]{12}))$")).IsMatch(ctrl.Text.Trim()))
+            {
+                errorProviderGeneral.SetError (ctrl, "So cmnd hoac cccd khong hop le.");
             }
             else
             {
-                errorProviderCMND.SetError(ctrl, "");
+                errorProviderGeneral.SetError(ctrl, "");
             }
 
 
@@ -247,12 +261,15 @@ namespace _1760081.main
             Control ctrl = (Control)sender;
             if (ctrl.Text.Length == 0)
             {
-                errorProviderNamSinh.SetError(ctrl, "Ban phai nhap nam sinh.");
-
+                errorProviderGeneral.SetError(ctrl, "Ban phai nhap nam sinh.");
+            }
+            else if (!(new Regex("^((19|20)([0-9]{2}))$").IsMatch(ctrl.Text.Trim())))
+            {
+                errorProviderGeneral.SetError (ctrl, "Nam sinh khong hop le.");
             }
             else
             {
-                errorProviderNamSinh.SetError(ctrl, "");
+                errorProviderGeneral.SetError(ctrl, "");
             }
 
 

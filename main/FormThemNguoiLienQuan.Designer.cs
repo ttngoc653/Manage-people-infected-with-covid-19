@@ -40,11 +40,7 @@
             this.comboBoxTT = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.errorProviderHoTen = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderCMND = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderNamSinh = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderNoiDieuTri = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderQuan = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderGeneral = new System.Windows.Forms.ErrorProvider(this.components);
             this.cbbPhuong = new System.Windows.Forms.ComboBox();
             this.txtSoNhaDuong = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -54,24 +50,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.cbbQuan = new System.Windows.Forms.ComboBox();
             this.cbbNguoiLienQuan = new System.Windows.Forms.ComboBox();
-            this.txtNguoiLienQuan = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.cbbNoiDieuTriCachLy = new System.Windows.Forms.ComboBox();
-            this.errorProviderThanhPho = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderPhuong = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderSoNhaDuong = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderTinhTrang = new System.Windows.Forms.ErrorProvider(this.components);
-            this.errorProviderLienQuanVoi = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderHoTen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderCMND)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderNamSinh)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderNoiDieuTri)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderQuan)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderThanhPho)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderPhuong)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderSoNhaDuong)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderTinhTrang)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderLienQuanVoi)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderGeneral)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -148,8 +129,7 @@
             "F0",
             "F1",
             "F2",
-            "F3",
-            " "});
+            "F3"});
             this.comboBoxTT.Location = new System.Drawing.Point(110, 144);
             this.comboBoxTT.Name = "comboBoxTT";
             this.comboBoxTT.Size = new System.Drawing.Size(67, 21);
@@ -174,25 +154,9 @@
             this.btnAdd.Text = "Thêm người liên quan";
             this.btnAdd.UseVisualStyleBackColor = true;
             // 
-            // errorProviderHoTen
+            // errorProviderGeneral
             // 
-            this.errorProviderHoTen.ContainerControl = this;
-            // 
-            // errorProviderCMND
-            // 
-            this.errorProviderCMND.ContainerControl = this;
-            // 
-            // errorProviderNamSinh
-            // 
-            this.errorProviderNamSinh.ContainerControl = this;
-            // 
-            // errorProviderNoiDieuTri
-            // 
-            this.errorProviderNoiDieuTri.ContainerControl = this;
-            // 
-            // errorProviderQuan
-            // 
-            this.errorProviderQuan.ContainerControl = this;
+            this.errorProviderGeneral.ContainerControl = this;
             // 
             // cbbPhuong
             // 
@@ -271,14 +235,7 @@
             this.cbbNguoiLienQuan.Name = "cbbNguoiLienQuan";
             this.cbbNguoiLienQuan.Size = new System.Drawing.Size(426, 21);
             this.cbbNguoiLienQuan.Sorted = true;
-            this.cbbNguoiLienQuan.TabIndex = 0;
-            // 
-            // txtNguoiLienQuan
-            // 
-            this.txtNguoiLienQuan.Location = new System.Drawing.Point(111, 171);
-            this.txtNguoiLienQuan.Name = "txtNguoiLienQuan";
-            this.txtNguoiLienQuan.Size = new System.Drawing.Size(426, 20);
-            this.txtNguoiLienQuan.TabIndex = 19;
+            this.cbbNguoiLienQuan.TabIndex = 19;
             // 
             // label11
             // 
@@ -298,26 +255,6 @@
             this.cbbNoiDieuTriCachLy.Size = new System.Drawing.Size(244, 21);
             this.cbbNoiDieuTriCachLy.TabIndex = 17;
             // 
-            // errorProviderThanhPho
-            // 
-            this.errorProviderThanhPho.ContainerControl = this;
-            // 
-            // errorProviderPhuong
-            // 
-            this.errorProviderPhuong.ContainerControl = this;
-            // 
-            // errorProviderSoNhaDuong
-            // 
-            this.errorProviderSoNhaDuong.ContainerControl = this;
-            // 
-            // errorProviderTinhTrang
-            // 
-            this.errorProviderTinhTrang.ContainerControl = this;
-            // 
-            // errorProviderLienQuanVoi
-            // 
-            this.errorProviderLienQuanVoi.ContainerControl = this;
-            // 
             // FormThemNguoiLienQuan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -325,7 +262,6 @@
             this.ClientSize = new System.Drawing.Size(572, 265);
             this.Controls.Add(this.cbbNoiDieuTriCachLy);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.txtNguoiLienQuan);
             this.Controls.Add(this.cbbNguoiLienQuan);
             this.Controls.Add(this.cbbQuan);
             this.Controls.Add(this.label10);
@@ -349,16 +285,7 @@
             this.Name = "FormThemNguoiLienQuan";
             this.ShowIcon = false;
             this.Text = "Thêm thông tin người liên quan Covis-19";
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderHoTen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderCMND)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderNamSinh)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderNoiDieuTri)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderQuan)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderThanhPho)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderPhuong)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderSoNhaDuong)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderTinhTrang)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderLienQuanVoi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderGeneral)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -377,11 +304,7 @@
         private System.Windows.Forms.ComboBox comboBoxTT;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.ErrorProvider errorProviderHoTen;
-        private System.Windows.Forms.ErrorProvider errorProviderCMND;
-        private System.Windows.Forms.ErrorProvider errorProviderNamSinh;
-        private System.Windows.Forms.ErrorProvider errorProviderNoiDieuTri;
-        private System.Windows.Forms.ErrorProvider errorProviderQuan;
+        private System.Windows.Forms.ErrorProvider errorProviderGeneral;
         private System.Windows.Forms.ComboBox cbbQuan;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox cbbTinh;
@@ -392,12 +315,6 @@
         private System.Windows.Forms.ComboBox cbbPhuong;
         private System.Windows.Forms.ComboBox cbbNoiDieuTriCachLy;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtNguoiLienQuan;
         private System.Windows.Forms.ComboBox cbbNguoiLienQuan;
-        private System.Windows.Forms.ErrorProvider errorProviderThanhPho;
-        private System.Windows.Forms.ErrorProvider errorProviderPhuong;
-        private System.Windows.Forms.ErrorProvider errorProviderSoNhaDuong;
-        private System.Windows.Forms.ErrorProvider errorProviderTinhTrang;
-        private System.Windows.Forms.ErrorProvider errorProviderLienQuanVoi;
     }
 }

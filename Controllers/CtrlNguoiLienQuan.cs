@@ -17,14 +17,9 @@ namespace _1760081.Controllers
         internal static List<string> TimKiem(string sKey)
         {
             List<String> result = new List<string>();
-            using (var entity = new Models.QLTTCovid19Entities())
+            using (var entity = new Models.QLTTCovid19Entities ())
             {
-                List<Models.NguoiLienQuan> nguoiLienQuans = entity.NguoiLienQuans.Where(obj => obj.Cmnd.IndexOf(sKey) >= 0 || obj.HoTen.IndexOf(sKey) >= 0).OrderBy(obj => obj.HoTen).ToList();
-
-                foreach (Models.NguoiLienQuan item in nguoiLienQuans)
-                {
-                    result.Add(String.Concat(item.Cmnd, " - ", item.HoTen,  " - ",item.NamSinh, " - ", item.SoNhaDuong, ", Phường/Xã ", item.Ward.Name, ", Quận/Huyện/Thị xã", item.Ward.District.Name, ", Tỉnh/Thành phố ", item.Ward.District.Province.Name));
-                }
+                result = entity.NguoiLienQuans.Where (obj => obj.Cmnd.IndexOf (sKey) >= 0 || obj.HoTen.IndexOf (sKey) >= 0).OrderBy (obj => obj.HoTen).Select (item => item.Cmnd + " - " + item.HoTen + " - " + item.NamSinh + " - " + item.SoNhaDuong + ", Phường/Xã " + item.Ward.Name + ", Quận/Huyện/Thị xã" + item.Ward.District.Name + ", Tỉnh/Thành phố " + item.Ward.District.Province.Name).ToList ();
             }
 
             return result;

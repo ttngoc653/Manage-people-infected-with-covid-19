@@ -12,6 +12,8 @@ namespace _1760081.main
 {
     public partial class FormQuanLy : Form
     {
+        private String g_sUserName;
+
         public FormQuanLy(string userName, string quyen)
         {
             if (quyen!="1")
@@ -23,9 +25,23 @@ namespace _1760081.main
 
             InitializeComponent();
 
+            g_sUserName = userName;
             this.Text += " - Chao mung quan ly " + userName;
             this.FormClosed += FormQuanLy_FormClosed;
             this.Load += FormQuanLy_Load;
+            this.Activated += FormQuanLy_Activated;
+            btnThemNguoiLienQuan.Click += BtnThemNguoiLienQuan_Click;
+        }
+
+        private void FormQuanLy_Activated (object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnThemNguoiLienQuan_Click (object sender, EventArgs e)
+        {
+            main.FormThemNguoiLienQuan frm = new FormThemNguoiLienQuan (g_sUserName);
+            frm.ShowDialog ();
         }
 
         private void FormQuanLy_Load(object sender, EventArgs e)
@@ -42,7 +58,7 @@ namespace _1760081.main
         private void InitializeTableGridListNguoiLienQuan()
         {
             dgvMain.Columns.Add(CreateDataGridColumn("hoten", "Ho ten"));
-            dgvMain.Columns.Add(CreateDataGridColumn("hoten", "So CMND/CCCD"));
+            dgvMain.Columns.Add(CreateDataGridColumn("dinhdanh", "So CMND/CCCD"));
             dgvMain.Columns.Add(CreateDataGridColumn("namsinh", "Nam sinh"));
             dgvMain.Columns.Add(CreateDataGridColumn("sonhaduong", "So nha, duong"));
             dgvMain.Columns.Add(CreateDataGridColumn("phuongxa", "Phuong/Xa"));
@@ -59,6 +75,11 @@ namespace _1760081.main
             viewTextBoxColumn.Name = name;
             viewTextBoxColumn.ToolTipText = "Nhap de sap xep theo cot";
             return viewTextBoxColumn;
+        }
+
+        private void AddListNguoiNhiemToDataGrid (string sKey)
+        {
+
         }
         #endregion
     }

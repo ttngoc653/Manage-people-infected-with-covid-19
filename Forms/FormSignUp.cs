@@ -31,6 +31,8 @@ namespace _1760081.Forms
                 this.Text = "Tạo tài khoản quản lý";
                 btnSignUp.Text = "Tạo";
                 cbbRole.Enabled = false;
+                cbbRole.Hide ();
+                label3.Hide ();
             }
         }
 
@@ -42,6 +44,12 @@ namespace _1760081.Forms
             }
 
             string sPasswordHashed = Utils.MaHoa.String2Sha256(txtPassword.Text);
+
+            if (Controllers.CtrlTaiKhoan.DangNhap (txtUsername.Text.Trim (), "")!=null)
+            {
+                MessageBox.Show ("Ten tai khoan da ton tai. Vui long nhap ten tai khoan khac.");
+                return;
+            }
 
             if (Controllers.CtrlTaiKhoan.TaoTaiKhoan(txtUsername.Text.Trim(), sPasswordHashed, cbbRole.SelectedIndex))
             {

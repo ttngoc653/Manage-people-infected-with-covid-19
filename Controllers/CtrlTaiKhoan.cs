@@ -29,10 +29,13 @@ namespace _1760081.Controllers
 
         internal static bool DaCoTaiKhoan()
         {
+            int soTaiKhoan = 0;
             using (var entity = new QLTTCovid19Entities())
             {
-                return (entity.TaiKhoans.Count() == 0);
+                soTaiKhoan = entity.TaiKhoans.Count ();
             }
+
+            return soTaiKhoan != 0;
         }
 
         internal static TaiKhoan DangNhap(string sUserName,string sPassword)

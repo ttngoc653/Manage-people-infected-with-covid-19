@@ -47,7 +47,7 @@ namespace _1760081.Forms
                 Controllers.CtrlTaiKhoan.GhiNhatKy(sUsername, "Dang nhap that bai do sai mat khau.");
                 MessageBox.Show("Sai mat khau.");
             }
-            else if (tk.HasLock == false)
+            else if (tk.HasLock==true)
             {
                 Controllers.CtrlTaiKhoan.GhiNhatKy(sUsername, "Dang nhap that bai do tai khoan da bi khoa.");
 

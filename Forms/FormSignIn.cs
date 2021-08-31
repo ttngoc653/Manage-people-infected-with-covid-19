@@ -24,7 +24,7 @@ namespace _1760081.Forms
         {
             if (!Controllers.CtrlTaiKhoan.DaCoTaiKhoan())
             {
-                FormSignUp form = new FormSignUp();
+                manager.FormSignUp form = new manager.FormSignUp ();
                 form.IsFirstUser = true;
                 form.ShowDialog();
             }
@@ -55,12 +55,27 @@ namespace _1760081.Forms
             }
             else
             {
-                Controllers.CtrlTaiKhoan.GhiNhatKy(sUsername, "Dang nhap thanh cong.");
-
                 DialogResult = DialogResult.OK;
-                this.Hide();
-                main.FormQuanLy frm = new main.FormQuanLy(tk.UserName.Trim(), tk.Role.ToString());
-                frm.Show();
+                this.Hide ();
+
+                Form frm=new Form();
+                if (tk.Role==1)
+                {
+                    frm = new main.FormQuanLy (tk.UserName.Trim (), tk.Role.ToString ());
+                }
+                else if(tk.Role==2)
+                {
+                    frm = new main.FormQuanTri (tk.UserName.Trim (), tk.Role.ToString ());
+                }
+                else
+                {
+                    MessageBox.Show ("Nguoi dung co quyen khong hop le. Vui long lien he quan tri xu ly.");
+                    return;
+                }
+
+                Controllers.CtrlTaiKhoan.GhiNhatKy (sUsername, "Dang nhap thanh cong.");
+
+                frm.Show ();
             }
         }
     }

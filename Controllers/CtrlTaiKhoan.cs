@@ -18,7 +18,7 @@ namespace _1760081.Controllers
                 {
                     UserName = sUsername,
                     Password = sPassword,
-                    Role = lQuyen + 1,
+                    Role = lQuyen,
                     HasLock = false
                 };
                 entity.TaiKhoans.Add(tk);
@@ -27,15 +27,34 @@ namespace _1760081.Controllers
             return result;
         }
 
-        internal static bool DaCoTaiKhoan()
+        internal static bool DaCoTaiKhoan (string sUsername = "")
         {
             int soTaiKhoan = 0;
-            using (var entity = new QLTTCovid19Entities())
+            using (var entity = new QLTTCovid19Entities ())
             {
-                soTaiKhoan = entity.TaiKhoans.Count ();
+                if (sUsername.Length == 0)
+                {
+                    soTaiKhoan = entity.TaiKhoans.Count ();
+                }
+                else
+                {
+                    soTaiKhoan = entity.TaiKhoans.Where(obj=>obj.UserName==sUsername).Count ();
+                }
             }
 
             return soTaiKhoan != 0;
+        }
+
+        internal static List<TaiKhoan> LayToanBo ()
+        {
+            List<TaiKhoan> result = new List<TaiKhoan> ();
+
+            using (QLTTCovid19Entities entity=new QLTTCovid19Entities())
+            {
+                result = entity.TaiKhoans.ToList ();
+            }
+
+            return result;
         }
 
         internal static TaiKhoan DangNhap(string sUserName,string sPassword)
@@ -68,6 +87,16 @@ namespace _1760081.Controllers
 
                 entity.SaveChanges();
             }
+        }
+
+        internal static List<LichSuHoatDong> LayLichSuHoatDong (string sUserName)
+        {
+            List<LichSuHoatDong> result = new List<LichSuHoatDong> ();
+            using (QLTTCovid19Entities entity=new QLTTCovid19Entities())
+            {
+                result = entity.LichSuHoatDongs.Where (obj => obj.UserName == sUserName).ToList ();
+            }
+            return result;
         }
     }
 }

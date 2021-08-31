@@ -1,4 +1,4 @@
-﻿namespace _1760081.main
+﻿namespace _1760081.Forms.manager
 {
     partial class FormThemNguoiLienQuan
     {

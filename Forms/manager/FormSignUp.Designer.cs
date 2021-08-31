@@ -1,4 +1,4 @@
-﻿namespace _1760081.Forms
+﻿namespace _1760081.Forms.manager
 {
     partial class FormSignUp
     {
@@ -33,13 +33,11 @@
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cbbRole = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnSignUp
             // 
-            this.btnSignUp.Location = new System.Drawing.Point(106, 91);
+            this.btnSignUp.Location = new System.Drawing.Point(94, 64);
             this.btnSignUp.Name = "btnSignUp";
             this.btnSignUp.Size = new System.Drawing.Size(75, 23);
             this.btnSignUp.TabIndex = 0;
@@ -79,34 +77,11 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Mật khẩu:";
             // 
-            // cbbRole
-            // 
-            this.cbbRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbbRole.FormattingEnabled = true;
-            this.cbbRole.Items.AddRange(new object[] {
-            "Quản lý",
-            "Quản trị"});
-            this.cbbRole.Location = new System.Drawing.Point(94, 64);
-            this.cbbRole.Name = "cbbRole";
-            this.cbbRole.Size = new System.Drawing.Size(155, 21);
-            this.cbbRole.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 67);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Quyền:";
-            // 
             // FormSignUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(265, 126);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.cbbRole);
+            this.ClientSize = new System.Drawing.Size(265, 94);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtUsername);
@@ -127,8 +102,6 @@
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbbRole;
-        private System.Windows.Forms.Label label3;
     }
 }
 

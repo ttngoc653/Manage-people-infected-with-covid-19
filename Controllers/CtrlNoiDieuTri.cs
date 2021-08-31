@@ -45,5 +45,68 @@ namespace _1760081.Controllers
                 entity.SaveChanges();
             }
         }
+
+        internal static bool Them (string sTen, short lSucChua)
+        {
+            if (Lay(sTen)!=null)
+            {
+                throw new Exception ("Da ton tai " + sTen + " trong dach sach.");
+            }
+
+            bool result = false;
+            using (QLTTCovid19Entities entity=new QLTTCovid19Entities ())
+            {
+                NoiDieuTriCachLy noiDieuTriCachLy = new NoiDieuTriCachLy
+                {
+                    Ten = sTen,
+                    SucChua = lSucChua,
+                    SoLuongHienTaiTiepNhan = 0
+                };
+
+                entity.NoiDieuTriCachLies.Add (noiDieuTriCachLy);
+
+                result = entity.SaveChanges () > 0;
+            }
+            return result;
+        }
+
+        internal static NoiDieuTriCachLy Lay (string sTen)
+        {
+            NoiDieuTriCachLy result = null;
+            using (QLTTCovid19Entities entity = new QLTTCovid19Entities ())
+            {
+                result = entity.NoiDieuTriCachLies.Where (obj => obj.Ten == sTen).FirstOrDefault ();
+            }
+            return result;
+        }
+
+        internal static List<NoiDieuTriCachLy> LayTatCa ()
+        {
+            List<NoiDieuTriCachLy> result=new List<NoiDieuTriCachLy>();
+
+            using (QLTTCovid19Entities entity = new QLTTCovid19Entities ())
+            {
+                result = entity.NoiDieuTriCachLies.ToList();
+            }
+
+            return result;
+        }
+
+        internal static bool CapNhatSucChua(int lId,int lSucChua)
+        {
+            bool result = false;
+            using (QLTTCovid19Entities entity=new QLTTCovid19Entities ())
+            {
+                entity.NoiDieuTriCachLies.Where (obj => obj.id == lId).FirstOrDefault ().SucChua = lSucChua;
+
+                result = entity.SaveChanges () > 0;
+            }
+            return result;
+        }
+
+        internal static NoiDieuTriCachLy Lay (int key)
+        {
+            throw new NotImplementedException ();
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿
-namespace _1760081.main
+namespace _1760081.Forms.main
 {
     partial class FormQuanLy
     {
@@ -31,11 +31,11 @@ namespace _1760081.main
         {
             this.dgvMain = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnReload = new System.Windows.Forms.Button();
             this.btnThemNguoiLienQuan = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnThongKe = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -51,14 +51,15 @@ namespace _1760081.main
             this.dgvMain.Location = new System.Drawing.Point(0, 49);
             this.dgvMain.Name = "dgvMain";
             this.dgvMain.ReadOnly = true;
-            this.dgvMain.Size = new System.Drawing.Size(800, 372);
+            this.dgvMain.Size = new System.Drawing.Size(800, 401);
             this.dgvMain.TabIndex = 0;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btnThongKe);
+            this.panel1.Controls.Add(this.btnReload);
             this.panel1.Controls.Add(this.btnThemNguoiLienQuan);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.txtSearch);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -66,29 +67,15 @@ namespace _1760081.main
             this.panel1.Size = new System.Drawing.Size(800, 43);
             this.panel1.TabIndex = 1;
             // 
-            // label1
+            // btnReload
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Từ khóa tìm kiếm:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(109, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(183, 20);
-            this.textBox1.TabIndex = 1;
-            // 
-            // panel2
-            // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 427);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(800, 23);
-            this.panel2.TabIndex = 2;
+            this.btnReload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReload.Location = new System.Drawing.Point(509, 17);
+            this.btnReload.Name = "btnReload";
+            this.btnReload.Size = new System.Drawing.Size(124, 23);
+            this.btnReload.TabIndex = 0;
+            this.btnReload.Text = "Làm mới danh sách";
+            this.btnReload.UseVisualStyleBackColor = true;
             // 
             // btnThemNguoiLienQuan
             // 
@@ -100,22 +87,36 @@ namespace _1760081.main
             this.btnThemNguoiLienQuan.Text = "Thêm Người liên quan";
             this.btnThemNguoiLienQuan.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // txtSearch
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(509, 17);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Cập nhật danh sách";
-            this.button1.UseVisualStyleBackColor = true;
+            this.txtSearch.Location = new System.Drawing.Point(109, 12);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(183, 20);
+            this.txtSearch.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(91, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Từ khóa tìm kiếm:";
+            // 
+            // btnThongKe
+            // 
+            this.btnThongKe.Location = new System.Drawing.Point(365, 10);
+            this.btnThongKe.Name = "btnThongKe";
+            this.btnThongKe.Size = new System.Drawing.Size(75, 23);
+            this.btnThongKe.TabIndex = 3;
+            this.btnThongKe.Text = "Thống kê";
+            this.btnThongKe.UseVisualStyleBackColor = true;
             // 
             // FormQuanLy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgvMain);
             this.Name = "FormQuanLy";
@@ -131,10 +132,10 @@ namespace _1760081.main
 
         private System.Windows.Forms.DataGridView dgvMain;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnReload;
         private System.Windows.Forms.Button btnThemNguoiLienQuan;
+        private System.Windows.Forms.Button btnThongKe;
     }
 }

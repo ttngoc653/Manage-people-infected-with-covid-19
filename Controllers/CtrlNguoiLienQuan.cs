@@ -67,5 +67,27 @@ namespace _1760081.Controllers
 
             return result;
         }
+
+        internal static LichSuTinhTrangNhiem TinhTrangHienTai (string sCmnd)
+        {
+            LichSuTinhTrangNhiem result = null;
+            using (QLTTCovid19Entities entity = new QLTTCovid19Entities ())
+            {
+                result = entity.LichSuTinhTrangNhiems.Where (obj => obj.LaHienTai == true && obj.Cmnd == sCmnd).FirstOrDefault ();
+            }
+
+            return result;
+        }
+
+        internal static List<NguoiLienQuan> LayToanBo ()
+        {
+            List<NguoiLienQuan> result = null;
+            using (QLTTCovid19Entities entity = new QLTTCovid19Entities ())
+            {
+                result = entity.NguoiLienQuans.ToList();
+            }
+
+            return result;
+        }
     }
 }

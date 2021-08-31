@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _1760081.main
+namespace _1760081.Forms.manager
 {
     public partial class FormThemNguoiLienQuan : Form
     {
@@ -31,6 +31,7 @@ namespace _1760081.main
             cbbNoiDieuTriCachLy.Validating += CbbNoiDieuTriCachLy_Validating;
             cbbNguoiLienQuan.SelectedValueChanged += CbbNguoiLienQuan_SelectedValueChanged;
             cbbNguoiLienQuan.TextChanged += CbbNguoiLienQuan_TextChanged;
+            cbbNguoiLienQuan.Validating += CbbNguoiLienQuan_Validating;
             //comboBoxDiaChi.Validating += ComboBoxDiaChi_Validating;
 
             cbbTinh.SelectedValueChanged += CbbTinh_SelectedValueChanged;
@@ -39,6 +40,18 @@ namespace _1760081.main
             this.Load += Nguoinhiemcovid_Load;
 
             btnAdd.Click += BtnAdd_Click;
+        }
+
+        private void CbbNguoiLienQuan_Validating (object sender, CancelEventArgs e)
+        {
+            if (cbbNguoiLienQuan.Text.Trim ().Length > 0 && Controllers.CtrlNguoiLienQuan.TimKiemTheoCmnd (cbbNguoiLienQuan.Text.Trim ()) == null)
+            {
+                errorProviderGeneral.SetError (cbbNguoiLienQuan, "Nguoi lien quan khong ton tai.");
+            }
+            else
+            {
+                errorProviderGeneral.SetError (cbbNguoiLienQuan, "");
+            }
         }
 
         private void ComboBoxTT_Validating(object sender, CancelEventArgs e)
@@ -205,6 +218,7 @@ namespace _1760081.main
             cbbNoiDieuTriCachLy.Items.Clear();
 
             cbbTinh.Items.AddRange(Controllers.CtrlKhuVuc.LayDanhSachTenTinhThanhPho().ToArray());
+            cbbNoiDieuTriCachLy.Items.AddRange (Controllers.CtrlNoiDieuTri.LayTatCa ().Select (obj => obj.Ten).ToArray());
         }
 
         private void CbbNoiDieuTriCachLy_Validating(object sender, CancelEventArgs e)

@@ -59,28 +59,47 @@
     <Compile Include="Controllers\CtrlNguoiLienQuan.cs" />
     <Compile Include="Controllers\CtrlNoiDieuTri.cs" />
     <Compile Include="Controllers\CtrlTaiKhoan.cs" />
+    <Compile Include="Forms\admin\FormQuanLyNoiDieuTriCachLy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\admin\FormQuanLyNoiDieuTriCachLy.Designer.cs">
+      <DependentUpon>FormQuanLyNoiDieuTriCachLy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\admin\FormQuanLyTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\admin\FormQuanLyTaiKhoan.Designer.cs">
+      <DependentUpon>FormQuanLyTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormUtil.cs" />
+    <Compile Include="Forms\main\FormQuanTri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\main\FormQuanTri.Designer.cs">
+      <DependentUpon>FormQuanTri.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormSignIn.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormSignIn.Designer.cs">
       <DependentUpon>FormSignIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormSignUp.cs">
+    <Compile Include="Forms\manager\FormSignUp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormSignUp.Designer.cs">
+    <Compile Include="Forms\manager\FormSignUp.Designer.cs">
       <DependentUpon>FormSignUp.cs</DependentUpon>
     </Compile>
-    <Compile Include="main\FormQuanLy.cs">
+    <Compile Include="Forms\main\FormQuanLy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="main\FormQuanLy.Designer.cs">
+    <Compile Include="Forms\main\FormQuanLy.Designer.cs">
       <DependentUpon>FormQuanLy.cs</DependentUpon>
     </Compile>
-    <Compile Include="main\FormThemNguoiLienQuan.cs">
+    <Compile Include="Forms\manager\FormThemNguoiLienQuan.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="main\FormThemNguoiLienQuan.Designer.cs">
+    <Compile Include="Forms\manager\FormThemNguoiLienQuan.Designer.cs">
       <DependentUpon>FormThemNguoiLienQuan.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\District.cs">
@@ -125,16 +144,25 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\MaHoa.cs" />
+    <EmbeddedResource Include="Forms\admin\FormQuanLyNoiDieuTriCachLy.resx">
+      <DependentUpon>FormQuanLyNoiDieuTriCachLy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\admin\FormQuanLyTaiKhoan.resx">
+      <DependentUpon>FormQuanLyTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\main\FormQuanTri.resx">
+      <DependentUpon>FormQuanTri.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSignIn.resx">
       <DependentUpon>FormSignIn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormSignUp.resx">
+    <EmbeddedResource Include="Forms\manager\FormSignUp.resx">
       <DependentUpon>FormSignUp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="main\FormQuanLy.resx">
+    <EmbeddedResource Include="Forms\main\FormQuanLy.resx">
       <DependentUpon>FormQuanLy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="main\FormThemNguoiLienQuan.resx">
+    <EmbeddedResource Include="Forms\manager\FormThemNguoiLienQuan.resx">
       <DependentUpon>FormThemNguoiLienQuan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

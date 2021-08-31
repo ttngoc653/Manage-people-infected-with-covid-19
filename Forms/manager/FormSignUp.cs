@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _1760081.Forms
+namespace _1760081.Forms.manager
 {
     public partial class FormSignUp : Form
     {
@@ -17,9 +17,7 @@ namespace _1760081.Forms
         public FormSignUp()
         {
             InitializeComponent();
-
-            cbbRole.SelectedIndex = 0;
-
+            
             Load += FormSignUp_Load;
             btnSignUp.Click += BtnSignUp_Click;
         }
@@ -28,11 +26,8 @@ namespace _1760081.Forms
         {
             if (IsFirstUser)
             {
-                this.Text = "Tạo tài khoản quản lý";
+                this.Text = "Tao tai khoan quan tri";
                 btnSignUp.Text = "Tạo";
-                cbbRole.Enabled = false;
-                cbbRole.Hide ();
-                label3.Hide ();
             }
         }
 
@@ -51,13 +46,15 @@ namespace _1760081.Forms
                 return;
             }
 
-            if (Controllers.CtrlTaiKhoan.TaoTaiKhoan(txtUsername.Text.Trim(), sPasswordHashed, cbbRole.SelectedIndex))
+            if (Controllers.CtrlTaiKhoan.TaoTaiKhoan (txtUsername.Text.Trim (), sPasswordHashed, 2))
             {
-                MessageBox.Show("Đã tạo tài khoản thành công.");
+                MessageBox.Show ("Đã tạo tài khoản thành công.\nVui lòng đăng nhập tài khoản quản trị vừa tạo.");
+
+                DialogResult = DialogResult.OK;
             }
             else
             {
-                MessageBox.Show("Có sự cố khi tạo tài khoản.");
+                MessageBox.Show ("Có sự cố khi tạo tài khoản.");
             }
         }
     }

@@ -57,6 +57,16 @@ namespace _1760081.Controllers
             return result;
         }
 
+        internal static void Khoa(string sUserName, bool hasLock)
+        {
+            using (QLTTCovid19Entities entity = new QLTTCovid19Entities())
+            {
+                entity.TaiKhoans.Where(obj => obj.UserName == sUserName).FirstOrDefault().HasLock = hasLock;
+
+                entity.SaveChanges();
+            }
+        }
+
         internal static TaiKhoan DangNhap(string sUserName,string sPassword)
         {
             TaiKhoan tk = null;

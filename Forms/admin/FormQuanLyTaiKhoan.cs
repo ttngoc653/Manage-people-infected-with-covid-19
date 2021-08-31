@@ -13,6 +13,7 @@ namespace _1760081.Forms.admin
     public partial class FormQuanLyTaiKhoan : Form
     {
         private string g_sUsername;
+        private string g_sUsernameSeenHistory;
 
         public FormQuanLyTaiKhoan (string sUsername)
         {
@@ -36,11 +37,15 @@ namespace _1760081.Forms.admin
 
         private void DgvDanhSachTaiKhoan_CellValueChanged (object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex > -1)
+            if (e.RowIndex > -1 && e.ColumnIndex == 1)
             {
-                string sUserName = dgvDanhSachTaiKhoan.Rows[e.RowIndex].Cells[0].Value.ToString ();
-                string sChecked = dgvDanhSachTaiKhoan.Rows[e.RowIndex].Cells[1].Value.ToString ();
-                Console.WriteLine (sChecked);
+                dgvDanhSachTaiKhoan.CommitEdit(DataGridViewDataErrorContexts.Commit);
+
+                string sUserName = dgvDanhSachTaiKhoan.Rows[e.RowIndex].Cells[0].Value.ToString();
+                DataGridViewCheckBoxCell cell = dgvDanhSachTaiKhoan.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewCheckBoxCell;
+
+                Controllers.CtrlTaiKhoan.Khoa(sUserName, Convert.ToBoolean(cell.Value));
+                Controllers.CtrlTaiKhoan.GhiNhatKy(g_sUsername, "Khoa tai khoan " + sUserName);
             }
         }
 
@@ -68,6 +73,7 @@ namespace _1760081.Forms.admin
                 if (Controllers.CtrlTaiKhoan.TaoTaiKhoan (txtUsername.Text.Trim (), sPasswordHashed, cbbQuyen.SelectedIndex + 1))
                 {
                     MessageBox.Show ("Da tao tai khoan thanh cong.");
+                    Controllers.CtrlTaiKhoan.GhiNhatKy(g_sUsername, "Tao tai khoan " + txtUsername.Text.Trim());
                 }
                 else
                 {
@@ -98,6 +104,12 @@ namespace _1760081.Forms.admin
                 foreach (Models.LichSuHoatDong item in lichSuHoatDongs)
                 {
                     dgvLichSuHoatDong.Rows.Add (item.ThoiGian.ToString (), item.HanhDong);
+                }
+
+                if (g_sUsernameSeenHistory!=sUserName)
+                {
+                    Controllers.CtrlTaiKhoan.GhiNhatKy(g_sUsername, "Xem lich su hoat dong cua " + sUserName);
+                    g_sUsernameSeenHistory = sUserName;
                 }
             }
         }

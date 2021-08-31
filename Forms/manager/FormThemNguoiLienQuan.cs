@@ -30,23 +30,27 @@ namespace _1760081.Forms.manager
             comboBoxTT.Validating += ComboBoxTT_Validating;
             cbbNoiDieuTriCachLy.Validating += CbbNoiDieuTriCachLy_Validating;
             cbbNguoiLienQuan.SelectedValueChanged += CbbNguoiLienQuan_SelectedValueChanged;
-            cbbNguoiLienQuan.TextChanged += CbbNguoiLienQuan_TextChanged;
-            cbbNguoiLienQuan.Validating += CbbNguoiLienQuan_Validating;
+            txtNguoiLay.TextChanged += CbbNguoiLienQuan_TextChanged;
             //comboBoxDiaChi.Validating += ComboBoxDiaChi_Validating;
 
             cbbTinh.SelectedValueChanged += CbbTinh_SelectedValueChanged;
-            cbbQuan.SelectedValueChanged += CbbQuan_SelectedValueChanged;
+            cbbQuan.SelectedValueChanged += CbbQuan_SelectedValueChanged; txtNguoiLay.LostFocus += TxtNguoiLay_LostFocus;
 
             this.Load += Nguoinhiemcovid_Load;
 
             btnAdd.Click += BtnAdd_Click;
         }
 
+        private void TxtNguoiLay_LostFocus(object sender, EventArgs e)
+        {
+            cbbNguoiLienQuan.DroppedDown = false;
+        }
+
         private void CbbNguoiLienQuan_Validating (object sender, CancelEventArgs e)
         {
-            if (cbbNguoiLienQuan.Text.Trim ().Length > 0 && Controllers.CtrlNguoiLienQuan.TimKiemTheoCmnd (cbbNguoiLienQuan.Text.Trim ()) == null)
+            if (txtNguoiLay.Text.Trim ().Length > 0 && Controllers.CtrlNguoiLienQuan.TimKiemTheoCmnd (txtNguoiLay.Text.Trim ()) == null)
             {
-                errorProviderGeneral.SetError (cbbNguoiLienQuan, "Nguoi lien quan khong ton tai.");
+                errorProviderGeneral.SetError (cbbNguoiLienQuan, "Nguoi lay khong ton tai.");
             }
             else
             {
@@ -69,12 +73,19 @@ namespace _1760081.Forms.manager
 
         private void CbbNguoiLienQuan_SelectedValueChanged(object sender, EventArgs e)
         {
-            cbbNguoiLienQuan.Text = cbbNguoiLienQuan.Text.Split(new char[' ']).ElementAt(0);
+            txtNguoiLay.TextChanged -= CbbNguoiLienQuan_TextChanged;
+
+            string sSelected = cbbNguoiLienQuan.Text;
+            txtNguoiLay.Text = sSelected.Split(' ').ElementAt(0);
+
+            txtNguoiLay.TextChanged += CbbNguoiLienQuan_TextChanged;
+            txtNguoiLay.Focus();
+            txtNguoiLay.SelectionStart = txtNguoiLay.Text.Length;
         }
 
         private void CbbNguoiLienQuan_TextChanged(object sender, EventArgs e)
         {
-            string sKey = cbbNguoiLienQuan.Text.Trim();
+            string sKey = txtNguoiLay.Text.Trim();
             List<String> dsNguoiLay = Controllers.CtrlNguoiLienQuan.TimKiem(sKey);
             cbbNguoiLienQuan.Items.Clear();
             cbbNguoiLienQuan.Items.AddRange(dsNguoiLay.ToArray());
@@ -86,6 +97,8 @@ namespace _1760081.Forms.manager
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
+            CbbNguoiLienQuan_Validating(txtNguoiLay, null);
+
             foreach (Control ctrl in this.Controls)
             {
                 string sValidate = errorProviderGeneral.GetError (ctrl);
@@ -107,14 +120,12 @@ namespace _1760081.Forms.manager
                     NamSinh = short.Parse(txtNamSinh.Text.Trim()),
                     SoNhaDuong = txtSoNhaDuong.Text.Trim(),
                     PhuongXa = ward.Id,
-                    Ward = ward
                 };
 
                 if (cbbNguoiLienQuan.Text.Trim().Length > 0)
                 {
                     Models.NguoiLienQuan nguoiLay = CtrlNguoiLienQuan.TimKiemTheoCmnd(cbbNguoiLienQuan.Text.Trim());
 
-                    nguoiLienQuan.NguoiLienQuan2 = nguoiLay;
                     nguoiLienQuan.NguoiLay = nguoiLay.Cmnd;
                 }
 
@@ -124,16 +135,20 @@ namespace _1760081.Forms.manager
                     throw new Exception("Noi cach ly khong the tiep nhan them benh nhan.");
                 }
 
-                nguoiLienQuan.LichSuTinhTrangNhiems.Add(new Models.LichSuTinhTrangNhiem { 
-                    Cmnd=nguoiLienQuan.Cmnd,
-                    LaHienTai=true,
-                    NoiCachLy=iNoiDieuTriCachLy.id,
-                    ThoiGianCapNhat=DateTime.Now,
-                    TinhTrang=comboBoxTT.Text.Trim(),
-                    NoiDieuTriCachLy=iNoiDieuTriCachLy
+                nguoiLienQuan.LichSuTinhTrangNhiems.Add(new Models.LichSuTinhTrangNhiem
+                {
+                    Cmnd = nguoiLienQuan.Cmnd,
+                    LaHienTai = true,
+                    NoiCachLy = iNoiDieuTriCachLy.id,
+                    ThoiGianCapNhat = DateTime.Now,
+                    TinhTrang = comboBoxTT.Text.Trim(),
+                    NoiDieuTriCachLy = iNoiDieuTriCachLy
                 });
 
-                bool giaTriTraVe = Controllers.CtrlNguoiLienQuan.Them(nguoiLienQuan);
+                if (Controllers.CtrlNguoiLienQuan.Them(nguoiLienQuan))
+                {
+
+                }
             }
             catch (Exception ex)
             {

@@ -62,5 +62,38 @@ namespace _1760081.Controllers
             }
             return result;
         }
+
+        internal static Ward LayPhuongXa(int? lId)
+        {
+            Ward result = null;
+            using (QLTTCovid19Entities entity = new QLTTCovid19Entities())
+            {
+                result = entity.Wards.Where(obj => obj.Id == lId).FirstOrDefault();
+            }
+
+            return result;
+        }
+
+        internal static District LayQuanHuyen(int? lId)
+        {
+            District result = null;
+            using (QLTTCovid19Entities entity = new QLTTCovid19Entities())
+            {
+                result = entity.Districts.Where(obj => obj.Id == lId).FirstOrDefault();
+            }
+
+            return result;
+        }
+
+        internal static Province LayTinhThanh(int? phuongXa)
+        {
+            Province result = null;
+            using (QLTTCovid19Entities entity = new QLTTCovid19Entities())
+            {
+                result = entity.Provinces.Where(obj => obj.Id == phuongXa).FirstOrDefault();
+            }
+
+            return result;
+        }
     }
 }

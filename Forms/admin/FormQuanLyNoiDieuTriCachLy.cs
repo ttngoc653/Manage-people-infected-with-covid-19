@@ -53,7 +53,7 @@ namespace _1760081.Forms.admin
                 {
                     dgvList.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "";
 
-                    int lSucChua = int.Parse (dgvList.Rows[e.RowIndex].Cells[0].Value.ToString ());
+                    int lSucChua = int.Parse (e.FormattedValue.ToString ());
 
                     if (g_dicDanhSachDaThayDoiSucChua.ContainsKey(lId))
                     {
@@ -76,6 +76,8 @@ namespace _1760081.Forms.admin
             {
                 dgvList.Rows.Add (item.id.ToString (), item.Ten, item.SoLuongHienTaiTiepNhan.ToString (), item.SucChua.ToString ());
             }
+
+            g_dicDanhSachDaThayDoiSucChua.Clear();
         }
 
         private void BtnSave_Click (object sender, EventArgs e)

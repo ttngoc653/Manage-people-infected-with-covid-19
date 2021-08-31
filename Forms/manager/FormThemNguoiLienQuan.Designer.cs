@@ -52,6 +52,7 @@
             this.cbbNguoiLienQuan = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.cbbNoiDieuTriCachLy = new System.Windows.Forms.ComboBox();
+            this.txtNguoiLay = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderGeneral)).BeginInit();
             this.SuspendLayout();
             // 
@@ -235,7 +236,7 @@
             this.cbbNguoiLienQuan.Name = "cbbNguoiLienQuan";
             this.cbbNguoiLienQuan.Size = new System.Drawing.Size(426, 21);
             this.cbbNguoiLienQuan.Sorted = true;
-            this.cbbNguoiLienQuan.TabIndex = 19;
+            this.cbbNguoiLienQuan.TabIndex = 0;
             // 
             // label11
             // 
@@ -255,11 +256,19 @@
             this.cbbNoiDieuTriCachLy.Size = new System.Drawing.Size(244, 21);
             this.cbbNoiDieuTriCachLy.TabIndex = 17;
             // 
+            // txtNguoiLay
+            // 
+            this.txtNguoiLay.Location = new System.Drawing.Point(111, 171);
+            this.txtNguoiLay.Name = "txtNguoiLay";
+            this.txtNguoiLay.Size = new System.Drawing.Size(411, 20);
+            this.txtNguoiLay.TabIndex = 19;
+            // 
             // FormThemNguoiLienQuan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(572, 265);
+            this.Controls.Add(this.txtNguoiLay);
             this.Controls.Add(this.cbbNoiDieuTriCachLy);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.cbbNguoiLienQuan);
@@ -316,5 +325,6 @@
         private System.Windows.Forms.ComboBox cbbNoiDieuTriCachLy;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cbbNguoiLienQuan;
+        private System.Windows.Forms.TextBox txtNguoiLay;
     }
 }

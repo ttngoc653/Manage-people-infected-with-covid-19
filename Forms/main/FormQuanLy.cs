@@ -56,29 +56,50 @@ namespace _1760081.Forms.main
 
         private void BtnReload_Click (object sender, EventArgs e)
         {
-            dgvMain.Rows.Clear ();
-
-            List<Models.NguoiLienQuan> nguoiLienQuans = Controllers.CtrlNguoiLienQuan.LayToanBo ();
-
-            foreach (Models.NguoiLienQuan item in nguoiLienQuans)
+            try
             {
-                List<string> listString = new List<string> ();
+                dgvMain.Rows.Clear();
 
-                listString.Add (item.HoTen);
-                listString.Add (item.Cmnd);
-                listString.Add (item.NamSinh.ToString());
-                listString.Add (item.SoNhaDuong);
-                listString.Add (item.Ward.Name);
-                listString.Add (item.Ward.District.Name);
-                listString.Add (item.Ward.District.Province.Name);
+                List<Models.NguoiLienQuan> nguoiLienQuans = Controllers.CtrlNguoiLienQuan.LayToanBo();
 
-                Models.LichSuTinhTrangNhiem tinhTrangNhiem = Controllers.CtrlNguoiLienQuan.TinhTrangHienTai (item.Cmnd);
+                foreach (Models.NguoiLienQuan item in nguoiLienQuans)
+                {
+                    List<string> listString = new List<string>();
 
-                listString.Add (tinhTrangNhiem.TinhTrang);
-                listString.Add (tinhTrangNhiem.NoiDieuTriCachLy.Ten);
-                listString.Add (tinhTrangNhiem.ThoiGianCapNhat.ToString ());
+                    listString.Add(item.HoTen);
+                    listString.Add(item.Cmnd);
+                    listString.Add(item.NamSinh.ToString());
+                    listString.Add(item.SoNhaDuong);
 
-                dgvMain.Rows.Add (listString.ToArray ());
+                    Models.Ward ward = Controllers.CtrlKhuVuc.LayPhuongXa(item.PhuongXa);
+                    Models.District district = Controllers.CtrlKhuVuc.LayQuanHuyen(ward.DistrictID);
+                    Models.Province province = Controllers.CtrlKhuVuc.LayTinhThanh(district.ProvinceId);
+
+                    listString.Add(ward.Name);
+                    listString.Add(district.Name);
+                    listString.Add(province.Name);
+
+                    Models.LichSuTinhTrangNhiem tinhTrangNhiem = Controllers.CtrlNguoiLienQuan.TinhTrangHienTai(item.Cmnd);
+                    if (tinhTrangNhiem == null)
+                    {
+
+                    }
+                    else
+                    {
+                        listString.Add(tinhTrangNhiem.TinhTrang);
+
+                        Models.NoiDieuTriCachLy noiDieuTriCachLy = Controllers.CtrlNoiDieuTri.LayTatCa().Where(obj => obj.id == tinhTrangNhiem.NoiCachLy).FirstOrDefault();
+
+                        listString.Add(noiDieuTriCachLy.Ten);
+                        listString.Add(tinhTrangNhiem.ThoiGianCapNhat.ToString());
+                    }
+
+                    dgvMain.Rows.Add(listString.ToArray());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

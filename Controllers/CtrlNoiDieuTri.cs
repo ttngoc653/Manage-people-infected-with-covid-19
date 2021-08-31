@@ -106,7 +106,12 @@ namespace _1760081.Controllers
 
         internal static NoiDieuTriCachLy Lay (int key)
         {
-            throw new NotImplementedException ();
+            NoiDieuTriCachLy result = null;
+            using (QLTTCovid19Entities entity = new QLTTCovid19Entities())
+            {
+                result = entity.NoiDieuTriCachLies.Where(obj => obj.id == key).FirstOrDefault();
+            }
+            return result;
         }
     }
 }

@@ -14,9 +14,9 @@ namespace _1760081.Controllers
             Ward result = null;
             using(var entity=new QLTTCovid19Entities())
             {
-                result = entity.Wards.Where(obj => obj.Name == sPhuongXa
-                                                        && obj.District.Name == sQuanHuyen
-                                                        && obj.District.Province.Name == sTinhThanhPho)
+                result = entity.Wards.Where(obj => (obj.Type + " " + obj.Name) == sPhuongXa
+                                                && (obj.District.Type + " " + obj.District.Name) == sQuanHuyen
+                                                && (obj.District.Province.Type + " " + obj.District.Province.Name) == sTinhThanhPho)
                                     .FirstOrDefault();
                 if (result == null)
                 {
@@ -33,7 +33,7 @@ namespace _1760081.Controllers
 
             using (var entity = new Models.QLTTCovid19Entities())
             {
-                result = entity.Provinces.Select(obj => obj.Name).ToList();
+                result = entity.Provinces.Select(obj => obj.Type + " " + obj.Name).ToList();
             }
 
             return result;
@@ -44,7 +44,9 @@ namespace _1760081.Controllers
             List<string> result = new List<string>();
             using (QLTTCovid19Entities entity=new QLTTCovid19Entities())
             {
-                result = entity.Districts.Where((obj) => obj.Province.Name == sTinhThanhPho).OrderBy(obj => obj.Name).Select(obj => obj.Name).ToList();
+                result = entity.Districts.Where((obj) => (obj.Province.Type + " " + obj.Province.Name) == sTinhThanhPho)
+                                         .OrderBy(obj => obj.Name)
+                                         .Select(obj => obj.Type + " " + obj.Name).ToList();
             }
             return result;
         }
@@ -55,9 +57,9 @@ namespace _1760081.Controllers
             using (QLTTCovid19Entities entity = new QLTTCovid19Entities())
             {
                 result = entity.Wards
-                                .Where((obj) => obj.District.Name == sQuanHuyen && obj.District.Province.Name == sTinhThanhPho)
+                                .Where((obj) => (obj.District.Type + " " + obj.District.Name) == sQuanHuyen && (obj.District.Province.Type + " " + obj.District.Province.Name) == sTinhThanhPho)
                                 .OrderBy(obj => obj.Name)
-                                .Select(obj => obj.Name)
+                                .Select(obj => obj.Type + " " + obj.Name)
                                 .ToList();
             }
             return result;
@@ -85,12 +87,12 @@ namespace _1760081.Controllers
             return result;
         }
 
-        internal static Province LayTinhThanh(int? phuongXa)
+        internal static Province LayTinhThanh(int? lId)
         {
             Province result = null;
             using (QLTTCovid19Entities entity = new QLTTCovid19Entities())
             {
-                result = entity.Provinces.Where(obj => obj.Id == phuongXa).FirstOrDefault();
+                result = entity.Provinces.Where(obj => obj.Id == lId).FirstOrDefault();
             }
 
             return result;

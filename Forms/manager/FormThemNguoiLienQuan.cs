@@ -141,8 +141,7 @@ namespace _1760081.Forms.manager
                     LaHienTai = true,
                     NoiCachLy = iNoiDieuTriCachLy.id,
                     ThoiGianCapNhat = DateTime.Now,
-                    TinhTrang = comboBoxTT.Text.Trim(),
-                    NoiDieuTriCachLy = iNoiDieuTriCachLy
+                    TinhTrang = comboBoxTT.Text.Trim()
                 });
 
                 if (Controllers.CtrlNguoiLienQuan.Them(nguoiLienQuan))
@@ -273,7 +272,7 @@ namespace _1760081.Forms.manager
             {
                 errorProviderGeneral.SetError(ctrl, "Ban phai nhap cmnd hoac cccd.");
             }
-            else if (!(new Regex("^(([0-9]{10})|([0-9]{12}))$")).IsMatch(ctrl.Text.Trim()))
+            else if (!(new Regex("^(([0-9]{9})|([0-9]{12}))$")).IsMatch(ctrl.Text.Trim()))
             {
                 errorProviderGeneral.SetError (ctrl, "So cmnd hoac cccd khong hop le.");
             }

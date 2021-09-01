@@ -31,9 +31,49 @@ namespace _1760081.Forms.main
             this.Load += FormQuanLy_Load;
             btnReload.Click += BtnReload_Click;
             btnThemNguoiLienQuan.Click += BtnThemNguoiLienQuan_Click;
+            dgvMain.CellDoubleClick += DgvMain_CellDoubleClick;
+            txtSearch.TextChanged += TxtSearch_TextChanged;
 
-            txtSearch.Enabled = false;
             btnThongKe.Enabled = false;
+        }
+
+        private void TxtSearch_TextChanged(object sender, EventArgs e)
+        {
+            bool hasText = false;
+            string sKey = txtSearch.Text;
+            object sText;
+            DuaDanhSachNguoiLienQuanVaoBang();
+            for (int iRow = 0; iRow < dgvMain.Rows.Count && txtSearch.Text.Length > 0; iRow++)
+            {
+                for (int iColumn = 0; iColumn < dgvMain.Rows[iRow].Cells.Count; iColumn++)
+                {
+                    sText = dgvMain.Rows[iRow].Cells[iColumn].Value;
+                    if (sText != null && sText.ToString().IndexOf(sKey) >= 0)
+                    {
+                        hasText = true;
+                        break;
+                    }
+                }
+
+                if (hasText == false)
+                {
+                    dgvMain.Rows.RemoveAt(iRow);
+                    iRow = iRow - 1;
+                    hasText = false;
+                }
+            }
+        }
+
+        private void DgvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex>=0)
+            {
+                string sCmnd = dgvMain.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+                manager.FormChiTietNguoiLienQuan frm = new manager.FormChiTietNguoiLienQuan(g_sUserName, sCmnd);
+                frm.ShowDialog();
+
+            }
         }
 
         private void BtnThemNguoiLienQuan_Click (object sender, EventArgs e)
@@ -58,44 +98,7 @@ namespace _1760081.Forms.main
         {
             try
             {
-                dgvMain.Rows.Clear();
-
-                List<Models.NguoiLienQuan> nguoiLienQuans = Controllers.CtrlNguoiLienQuan.LayToanBo();
-
-                foreach (Models.NguoiLienQuan item in nguoiLienQuans)
-                {
-                    List<string> listString = new List<string>();
-
-                    listString.Add(item.HoTen);
-                    listString.Add(item.Cmnd);
-                    listString.Add(item.NamSinh.ToString());
-                    listString.Add(item.SoNhaDuong);
-
-                    Models.Ward ward = Controllers.CtrlKhuVuc.LayPhuongXa(item.PhuongXa);
-                    Models.District district = Controllers.CtrlKhuVuc.LayQuanHuyen(ward.DistrictID);
-                    Models.Province province = Controllers.CtrlKhuVuc.LayTinhThanh(district.ProvinceId);
-
-                    listString.Add(ward.Name);
-                    listString.Add(district.Name);
-                    listString.Add(province.Name);
-
-                    Models.LichSuTinhTrangNhiem tinhTrangNhiem = Controllers.CtrlNguoiLienQuan.TinhTrangHienTai(item.Cmnd);
-                    if (tinhTrangNhiem == null)
-                    {
-
-                    }
-                    else
-                    {
-                        listString.Add(tinhTrangNhiem.TinhTrang);
-
-                        Models.NoiDieuTriCachLy noiDieuTriCachLy = Controllers.CtrlNoiDieuTri.LayTatCa().Where(obj => obj.id == tinhTrangNhiem.NoiCachLy).FirstOrDefault();
-
-                        listString.Add(noiDieuTriCachLy.Ten);
-                        listString.Add(tinhTrangNhiem.ThoiGianCapNhat.ToString());
-                    }
-
-                    dgvMain.Rows.Add(listString.ToArray());
-                }
+                DuaDanhSachNguoiLienQuanVaoBang();
             }
             catch (Exception ex)
             {
@@ -107,15 +110,75 @@ namespace _1760081.Forms.main
         private void InitializeTableGridListNguoiLienQuan()
         {
             dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn("hoten", "Ho ten"));
-            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn ("dinhdanh", "So CMND/CCCD"));
-            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn ("namsinh", "Nam sinh"));
-            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn ("sonhaduong", "So nha, duong"));
-            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn ("phuongxa", "Phuong/Xa"));
-            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn ("quanhuyen", "Quan/Huyen"));
-            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn ("tinhthanh", "Tinh/Thanh pho"));
-            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn ("trangthai", "Trang thai hien tai"));
-            dgvMain.Columns.Add (Forms.FormUtil.CreateDataGridColumn ("noidangdieutricachlyhientai", "Noi dang dieu tri cach ly hien tai"));
-            dgvMain.Columns.Add (Forms.FormUtil.CreateDataGridColumn ("capnhatluc", "Cap nhat luc"));
+            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn("dinhdanh", "So CMND/CCCD"));
+            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn("namsinh", "Nam sinh"));
+            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn("sonhaduong", "So nha, duong"));
+            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn("phuongxa", "Phuong/Xa"));
+            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn("quanhuyen", "Quan/Huyen"));
+            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn("tinhthanh", "Tinh/Thanh pho"));
+            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn("trangthai", "Trang thai hien tai"));
+            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn("noidangdieutricachlyhientai", "Noi dang dieu tri cach ly hien tai"));
+            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn("capnhatluc", "Cap nhat luc"));
+            dgvMain.Columns.Add(Forms.FormUtil.CreateDataGridColumn("laytu", "Lay tu"));
+        }
+
+        private void DuaDanhSachNguoiLienQuanVaoBang()
+        {
+            dgvMain.Rows.Clear();
+
+            List<Models.NguoiLienQuan> nguoiLienQuans = Controllers.CtrlNguoiLienQuan.LayToanBo();
+
+            foreach (Models.NguoiLienQuan item in nguoiLienQuans)
+            {
+                List<string> listString = new List<string>();
+
+                listString.Add(item.HoTen);
+                listString.Add(item.Cmnd);
+                listString.Add(item.NamSinh.ToString());
+                listString.Add(item.SoNhaDuong);
+
+                Models.Ward ward = Controllers.CtrlKhuVuc.LayPhuongXa(item.PhuongXa);
+                Models.District district = Controllers.CtrlKhuVuc.LayQuanHuyen(ward.DistrictID);
+                Models.Province province = Controllers.CtrlKhuVuc.LayTinhThanh(district.ProvinceId);
+
+                listString.Add(ward.Type + " " + ward.Name);
+                listString.Add(district.Type + " " + district.Name);
+                listString.Add(province.Type + " " + province.Name);
+
+                Models.LichSuTinhTrangNhiem tinhTrangNhiem = Controllers.CtrlNguoiLienQuan.TinhTrangHienTai(item.Cmnd);
+                if (tinhTrangNhiem != null)
+                {
+                    listString.Add(tinhTrangNhiem.TinhTrang);
+
+                    if (tinhTrangNhiem.NoiCachLy != null)
+                    {
+                        Models.NoiDieuTriCachLy noiDieuTriCachLy = Controllers.CtrlNoiDieuTri.LayTatCa().Where(obj => obj.id == tinhTrangNhiem.NoiCachLy).FirstOrDefault();
+
+                        listString.Add(noiDieuTriCachLy.Ten);
+                    }
+                    else
+                    {
+                        listString.Add("");
+                    }
+                    listString.Add(tinhTrangNhiem.ThoiGianCapNhat.ToString());
+                }
+
+                if (item.NguoiLay!=null)
+                {
+                    listString.Add(item.NguoiLay);
+                }
+                else
+                {
+                    listString.Add("");
+                }
+
+                int row = dgvMain.Rows.Add(listString.ToArray());
+
+                foreach (DataGridViewCell cell in dgvMain.Rows[row].Cells)
+                {
+                    cell.ToolTipText = "Nhấp 2 lần liên tiếp để xem chi tiết hoặc cập nhật tình trạng của " + item.HoTen;
+                }
+            }
         }
         #endregion
     }

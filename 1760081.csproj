@@ -59,6 +59,7 @@
     <Compile Include="Controllers\CtrlNguoiLienQuan.cs" />
     <Compile Include="Controllers\CtrlNoiDieuTri.cs" />
     <Compile Include="Controllers\CtrlTaiKhoan.cs" />
+    <Compile Include="Controllers\CtrlTinhTrangNhiem.cs" />
     <Compile Include="Forms\admin\FormQuanLyNoiDieuTriCachLy.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +71,12 @@
     </Compile>
     <Compile Include="Forms\admin\FormQuanLyTaiKhoan.Designer.cs">
       <DependentUpon>FormQuanLyTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCustomSort.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCustomSort.Designer.cs">
+      <DependentUpon>FormCustomSort.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormUtil.cs" />
     <Compile Include="Forms\main\FormQuanTri.cs">
@@ -83,6 +90,12 @@
     </Compile>
     <Compile Include="Forms\FormSignIn.Designer.cs">
       <DependentUpon>FormSignIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\manager\FormChiTietNguoiLienQuan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\manager\FormChiTietNguoiLienQuan.Designer.cs">
+      <DependentUpon>FormChiTietNguoiLienQuan.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\manager\FormSignUp.cs">
       <SubType>Form</SubType>
@@ -135,6 +148,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QlttCovid19Entity.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\SortType.cs" />
     <Compile Include="Models\TaiKhoan.cs">
       <DependentUpon>QlttCovid19Entity.tt</DependentUpon>
     </Compile>
@@ -150,11 +164,17 @@
     <EmbeddedResource Include="Forms\admin\FormQuanLyTaiKhoan.resx">
       <DependentUpon>FormQuanLyTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCustomSort.resx">
+      <DependentUpon>FormCustomSort.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\main\FormQuanTri.resx">
       <DependentUpon>FormQuanTri.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSignIn.resx">
       <DependentUpon>FormSignIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\manager\FormChiTietNguoiLienQuan.resx">
+      <DependentUpon>FormChiTietNguoiLienQuan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\manager\FormSignUp.resx">
       <DependentUpon>FormSignUp.cs</DependentUpon>
@@ -179,6 +199,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>QlttCovid19Entity.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include=".editorconfig" />
     <None Include="Models\QlttCovid19Entity.edmx.diagram">
       <DependentUpon>QlttCovid19Entity.edmx</DependentUpon>
     </None>

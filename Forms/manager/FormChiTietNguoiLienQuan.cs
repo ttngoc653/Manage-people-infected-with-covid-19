@@ -65,6 +65,8 @@ namespace _1760081.Forms.manager
                         Controllers.CtrlNoiDieuTri.CapNhatSoLuongHienTai(lMaNoiDieuTriCu);
                         Controllers.CtrlNoiDieuTri.CapNhatSoLuongHienTai(noiDieuTriCachLySelected.id);
                     }
+
+                    Controllers.CtrlTaiKhoan.GhiNhatKy(g_sUserName, "Cập nhật tình trạng " + g_sIdNLQ + " từ " + g_mTinhTrangHienTai.TinhTrang + " thành " + cbbTinhTrang.Text);
                 }
             }
             catch (Exception ex)
@@ -123,7 +125,9 @@ namespace _1760081.Forms.manager
                 this.Dispose();
             }
 
-            lblThongTin.Text = "Số CMND/CCCD: " + nguoiLienQuan.Cmnd;
+            Controllers.CtrlTaiKhoan.GhiNhatKy(g_sUserName, "Xem chi tiết" + nguoiLienQuan.Cmnd + " - " + nguoiLienQuan.HoTen);
+
+           lblThongTin.Text = "Số CMND/CCCD: " + nguoiLienQuan.Cmnd;
             lblThongTin.Text += "\nHọ tên: " + nguoiLienQuan.HoTen;
             lblThongTin.Text += "\nNăm sinh: " + nguoiLienQuan.NamSinh;
 

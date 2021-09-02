@@ -21,6 +21,18 @@ namespace _1760081.Controllers
             return result;
         }
 
+        internal static DateTime LayThoiGianDauTien()
+        {
+            DateTime result;
+
+            using (QLTTCovid19Entities entity=new QLTTCovid19Entities())
+            {
+                result = entity.LichSuTinhTrangNhiems.Min(obj => obj.ThoiGianCapNhat);
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Cap nhat tinh trang nhiem benh
         /// </summary>

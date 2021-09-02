@@ -34,9 +34,17 @@ namespace _1760081.Forms.main
             dgvMain.CellDoubleClick += DgvMain_CellDoubleClick;
             txtSearch.TextChanged += TxtSearch_TextChanged;
 
-            btnThongKe.Enabled = false;
-
             btnSort.Click += BtnSort_Click;
+            btnThongKe.Click += BtnThongKe_Click;
+
+        }
+
+        private void BtnThongKe_Click(object sender, EventArgs e)
+        {
+            Controllers.CtrlTaiKhoan.GhiNhatKy(g_sUserName,"Vào chức năng thống kê");
+
+            manager.FormThongKe frm = new manager.FormThongKe(g_sUserName);
+            frm.ShowDialog();
         }
 
         private void BtnSort_Click(object sender, EventArgs e)
@@ -109,6 +117,7 @@ namespace _1760081.Forms.main
             if (e.RowIndex>=0)
             {
                 string sCmnd = dgvMain.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string sHoTen = dgvMain.Rows[e.RowIndex].Cells[0].Value.ToString();
 
                 manager.FormChiTietNguoiLienQuan frm = new manager.FormChiTietNguoiLienQuan(g_sUserName, sCmnd);
                 frm.ShowDialog();
@@ -118,19 +127,30 @@ namespace _1760081.Forms.main
 
         private void BtnThemNguoiLienQuan_Click (object sender, EventArgs e)
         {
+            Controllers.CtrlTaiKhoan.GhiNhatKy(g_sUserName, "Vào chức năng thêm người liên quan");
+
             manager.FormThemNguoiLienQuan frm = new manager.FormThemNguoiLienQuan (g_sUserName);
             frm.ShowDialog ();
         }
 
         private void FormQuanLy_Load(object sender, EventArgs e)
         {
-            InitializeTableGridListNguoiLienQuan();
+            try
+            {
+                InitializeTableGridListNguoiLienQuan();
 
-            BtnReload_Click (btnReload, null);
+                DuaDanhSachNguoiLienQuanVaoBang();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void FormQuanLy_FormClosed(object sender, FormClosedEventArgs e)
         {
+            Controllers.CtrlTaiKhoan.GhiNhatKy(g_sUserName, "Thoát chương trình.");
+
             Application.Exit();
         }
 
@@ -138,6 +158,8 @@ namespace _1760081.Forms.main
         {
             try
             {
+                Controllers.CtrlTaiKhoan.GhiNhatKy(g_sUserName, "Lấy danh sách toàn bộ người liên quan có ở hệ thống.");
+
                 DuaDanhSachNguoiLienQuanVaoBang();
             }
             catch (Exception ex)

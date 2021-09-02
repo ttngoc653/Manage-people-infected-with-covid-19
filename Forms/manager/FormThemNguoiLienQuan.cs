@@ -146,7 +146,7 @@ namespace _1760081.Forms.manager
 
                 if (Controllers.CtrlNguoiLienQuan.Them(nguoiLienQuan))
                 {
-
+                    Controllers.CtrlTaiKhoan.GhiNhatKy(g_sUserName, "Thêm " + nguoiLienQuan.Cmnd + " - " + nguoiLienQuan.HoTen + " vào hệ thống");
                 }
             }
             catch (Exception ex)

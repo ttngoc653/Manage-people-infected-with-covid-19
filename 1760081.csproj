@@ -115,6 +115,12 @@
     <Compile Include="Forms\manager\FormThemNguoiLienQuan.Designer.cs">
       <DependentUpon>FormThemNguoiLienQuan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\manager\FormThongKe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\manager\FormThongKe.Designer.cs">
+      <DependentUpon>FormThongKe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\District.cs">
       <DependentUpon>QlttCovid19Entity.tt</DependentUpon>
     </Compile>
@@ -185,6 +191,9 @@
     <EmbeddedResource Include="Forms\manager\FormThemNguoiLienQuan.resx">
       <DependentUpon>FormThemNguoiLienQuan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\manager\FormThongKe.resx">
+      <DependentUpon>FormThongKe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -231,6 +240,9 @@
       <DependentUpon>QlttCovid19Entity.edmx</DependentUpon>
       <LastGenOutput>QlttCovid19Entity.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Forms\manager\report\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

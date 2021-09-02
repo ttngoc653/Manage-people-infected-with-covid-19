@@ -98,7 +98,7 @@ namespace _1760081.Forms.manager
                 {
                     noiDieuTriCachLy = Controllers.CtrlNoiDieuTri.Lay((int)item.NoiCachLy);
                 }
-                dgvLichSuTinhTrang.Rows.Add(item.ThoiGianCapNhat.ToString(), item.TinhTrang, noiDieuTriCachLy.Ten);
+                dgvLichSuTinhTrang.Rows.Add(item.ThoiGianCapNhat.ToString("yyyy-MM-dd HH:mm:ss"), item.TinhTrang, noiDieuTriCachLy.Ten);
             }
         }
 

@@ -124,7 +124,7 @@ namespace _1760081.Forms.manager
 
                 if (cbbNguoiLienQuan.Text.Trim().Length > 0)
                 {
-                    Models.NguoiLienQuan nguoiLay = CtrlNguoiLienQuan.TimKiemTheoCmnd(cbbNguoiLienQuan.Text.Trim());
+                    Models.NguoiLienQuan nguoiLay = CtrlNguoiLienQuan.TimKiemTheoCmnd(txtNguoiLay.Text.Trim());
 
                     nguoiLienQuan.NguoiLay = nguoiLay.Cmnd;
                 }

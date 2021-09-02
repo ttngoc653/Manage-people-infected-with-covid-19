@@ -8,6 +8,6 @@ namespace _1760081.Models
 {
     enum SortType
     {
-        AZ, ZA
+        A_Z, Z_A
     }
 }

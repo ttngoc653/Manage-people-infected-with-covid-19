@@ -68,7 +68,7 @@ namespace _1760081.Forms
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(180, 23);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Các cột không được sắp xếp:";
+            this.label1.Text = "Các cột chưa được sắp xếp:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // label2
@@ -174,7 +174,7 @@ namespace _1760081.Forms
             this.Controls.Add(this.lbxSort);
             this.Controls.Add(this.lbxQuery);
             this.Name = "FormCustomSort";
-            this.Text = "CustomSort";
+            this.Text = "Sắp xếp nhiều điều kiện";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

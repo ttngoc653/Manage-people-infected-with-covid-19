@@ -35,6 +35,46 @@ namespace _1760081.Forms.main
             txtSearch.TextChanged += TxtSearch_TextChanged;
 
             btnThongKe.Enabled = false;
+
+            btnSort.Click += BtnSort_Click;
+        }
+
+        private void BtnSort_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, string> dicNameHeaderText = new Dictionary<string, string>();
+
+            try
+            {
+                foreach (DataGridViewColumn column in dgvMain.Columns)
+                {
+                    dicNameHeaderText.Add(column.HeaderText, column.Name);
+                }
+
+                FormCustomSort frm = new FormCustomSort(dicNameHeaderText);
+
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    Dictionary<string, Models.SortType> listCanSort = (Dictionary<string, Models.SortType>)frm.GetCustomSortResult();
+
+                    List<string> listItem = listCanSort.Keys.ToList();
+
+                    for (int i = listItem.Count-1; i >= 0; i--)
+                    {
+                        if (listCanSort[listItem[i]]==  Models.SortType.A_Z)
+                        {
+                            dgvMain.Sort(dgvMain.Columns[listItem[i]], ListSortDirection.Ascending);
+                        }
+                        if (listCanSort[listItem[i]] == Models.SortType.Z_A)
+                        {
+                            dgvMain.Sort(dgvMain.Columns[listItem[i]], ListSortDirection.Descending);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.StackTrace);
+            }
         }
 
         private void TxtSearch_TextChanged(object sender, EventArgs e)
@@ -160,7 +200,7 @@ namespace _1760081.Forms.main
                     {
                         listString.Add("");
                     }
-                    listString.Add(tinhTrangNhiem.ThoiGianCapNhat.ToString());
+                    listString.Add(tinhTrangNhiem.ThoiGianCapNhat.ToString("yyyy-MM-dd HH:mm:ss"));
                 }
 
                 if (item.NguoiLay!=null)

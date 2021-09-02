@@ -31,11 +31,12 @@ namespace _1760081.Forms.main
         {
             this.dgvMain = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnThongKe = new System.Windows.Forms.Button();
             this.btnReload = new System.Windows.Forms.Button();
             this.btnThemNguoiLienQuan = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnThongKe = new System.Windows.Forms.Button();
+            this.btnSort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -44,18 +45,18 @@ namespace _1760081.Forms.main
             // 
             this.dgvMain.AllowUserToAddRows = false;
             this.dgvMain.AllowUserToDeleteRows = false;
-            this.dgvMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMain.Location = new System.Drawing.Point(0, 49);
+            this.dgvMain.Location = new System.Drawing.Point(0, 78);
             this.dgvMain.Name = "dgvMain";
             this.dgvMain.ReadOnly = true;
-            this.dgvMain.Size = new System.Drawing.Size(800, 401);
+            this.dgvMain.Size = new System.Drawing.Size(800, 372);
             this.dgvMain.TabIndex = 0;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnSort);
             this.panel1.Controls.Add(this.btnThongKe);
             this.panel1.Controls.Add(this.btnReload);
             this.panel1.Controls.Add(this.btnThemNguoiLienQuan);
@@ -64,13 +65,23 @@ namespace _1760081.Forms.main
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 43);
+            this.panel1.Size = new System.Drawing.Size(800, 72);
             this.panel1.TabIndex = 1;
+            // 
+            // btnThongKe
+            // 
+            this.btnThongKe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnThongKe.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThongKe.Location = new System.Drawing.Point(664, 12);
+            this.btnThongKe.Name = "btnThongKe";
+            this.btnThongKe.Size = new System.Drawing.Size(124, 31);
+            this.btnThongKe.TabIndex = 3;
+            this.btnThongKe.Text = "Thống kê";
+            this.btnThongKe.UseVisualStyleBackColor = true;
             // 
             // btnReload
             // 
-            this.btnReload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReload.Location = new System.Drawing.Point(509, 17);
+            this.btnReload.Location = new System.Drawing.Point(93, 49);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(124, 23);
             this.btnReload.TabIndex = 0;
@@ -80,9 +91,10 @@ namespace _1760081.Forms.main
             // btnThemNguoiLienQuan
             // 
             this.btnThemNguoiLienQuan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnThemNguoiLienQuan.Location = new System.Drawing.Point(639, 17);
+            this.btnThemNguoiLienQuan.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThemNguoiLienQuan.Location = new System.Drawing.Point(448, 12);
             this.btnThemNguoiLienQuan.Name = "btnThemNguoiLienQuan";
-            this.btnThemNguoiLienQuan.Size = new System.Drawing.Size(149, 23);
+            this.btnThemNguoiLienQuan.Size = new System.Drawing.Size(210, 31);
             this.btnThemNguoiLienQuan.TabIndex = 2;
             this.btnThemNguoiLienQuan.Text = "Thêm Người liên quan";
             this.btnThemNguoiLienQuan.UseVisualStyleBackColor = true;
@@ -103,14 +115,14 @@ namespace _1760081.Forms.main
             this.label1.TabIndex = 0;
             this.label1.Text = "Từ khóa tìm kiếm:";
             // 
-            // btnThongKe
+            // btnSort
             // 
-            this.btnThongKe.Location = new System.Drawing.Point(365, 10);
-            this.btnThongKe.Name = "btnThongKe";
-            this.btnThongKe.Size = new System.Drawing.Size(75, 23);
-            this.btnThongKe.TabIndex = 3;
-            this.btnThongKe.Text = "Thống kê";
-            this.btnThongKe.UseVisualStyleBackColor = true;
+            this.btnSort.Location = new System.Drawing.Point(12, 49);
+            this.btnSort.Name = "btnSort";
+            this.btnSort.Size = new System.Drawing.Size(75, 23);
+            this.btnSort.TabIndex = 4;
+            this.btnSort.Text = "Sắp xếp...";
+            this.btnSort.UseVisualStyleBackColor = true;
             // 
             // FormQuanLy
             // 
@@ -120,6 +132,7 @@ namespace _1760081.Forms.main
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgvMain);
             this.Name = "FormQuanLy";
+            this.ShowIcon = false;
             this.Text = "Trang chủ của quản lý";
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -137,5 +150,6 @@ namespace _1760081.Forms.main
         private System.Windows.Forms.Button btnReload;
         private System.Windows.Forms.Button btnThemNguoiLienQuan;
         private System.Windows.Forms.Button btnThongKe;
+        private System.Windows.Forms.Button btnSort;
     }
 }

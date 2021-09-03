@@ -41,5 +41,11 @@ namespace _1760081.Forms.manager
             cbbTinh.SelectedIndex = 0;
             cbbTinhNgay.SelectedIndex = 0;
         }
+
+        private void FormThongKe_Load_1 (object sender, EventArgs e)
+        {
+
+            this.reportViewer.RefreshReport ();
+        }
     }
 }

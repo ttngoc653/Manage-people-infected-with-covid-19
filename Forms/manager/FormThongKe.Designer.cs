@@ -39,11 +39,12 @@ namespace _1760081.Forms.manager
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.dtpIn = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cbbTinhNgay = new System.Windows.Forms.ComboBox();
             this.btnTKChung = new System.Windows.Forms.Button();
+            this.cbbTinhNgay = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dtpIn = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -60,19 +61,17 @@ namespace _1760081.Forms.manager
             // 
             // dtpFrom
             // 
-            this.dtpFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpFrom.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFrom.Location = new System.Drawing.Point(42, 6);
             this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(294, 20);
+            this.dtpFrom.Size = new System.Drawing.Size(140, 20);
             this.dtpFrom.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 38);
+            this.label2.Location = new System.Drawing.Point(217, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 2;
@@ -80,19 +79,17 @@ namespace _1760081.Forms.manager
             // 
             // dtpTo
             // 
-            this.dtpTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpTo.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTo.Location = new System.Drawing.Point(42, 32);
+            this.dtpTo.Location = new System.Drawing.Point(253, 6);
             this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(294, 20);
+            this.dtpTo.Size = new System.Drawing.Size(140, 20);
             this.dtpTo.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 61);
+            this.label3.Location = new System.Drawing.Point(426, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 13);
             this.label3.TabIndex = 4;
@@ -104,17 +101,17 @@ namespace _1760081.Forms.manager
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbbTinh.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbTinh.FormattingEnabled = true;
-            this.cbbTinh.Location = new System.Drawing.Point(42, 58);
+            this.cbbTinh.Location = new System.Drawing.Point(461, 6);
             this.cbbTinh.Name = "cbbTinh";
-            this.cbbTinh.Size = new System.Drawing.Size(294, 21);
+            this.cbbTinh.Size = new System.Drawing.Size(395, 21);
             this.cbbTinh.TabIndex = 5;
             // 
             // btnXemTKTT
             // 
-            this.btnXemTKTT.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnXemTKTT.Location = new System.Drawing.Point(137, 85);
+            this.btnXemTKTT.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnXemTKTT.Location = new System.Drawing.Point(862, 3);
             this.btnXemTKTT.Name = "btnXemTKTT";
-            this.btnXemTKTT.Size = new System.Drawing.Size(75, 23);
+            this.btnXemTKTT.Size = new System.Drawing.Size(46, 27);
             this.btnXemTKTT.TabIndex = 6;
             this.btnXemTKTT.Text = "Xem";
             this.btnXemTKTT.UseVisualStyleBackColor = true;
@@ -123,11 +120,11 @@ namespace _1760081.Forms.manager
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(352, 141);
+            this.tabControl1.Size = new System.Drawing.Size(919, 59);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -142,7 +139,7 @@ namespace _1760081.Forms.manager
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(344, 115);
+            this.tabPage1.Size = new System.Drawing.Size(911, 33);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Thống kê tình trạng theo khoảng ngày";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -157,10 +154,51 @@ namespace _1760081.Forms.manager
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(344, 115);
+            this.tabPage2.Size = new System.Drawing.Size(911, 33);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Thống kê chung theo ngày";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnTKChung
+            // 
+            this.btnTKChung.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnTKChung.Location = new System.Drawing.Point(862, 3);
+            this.btnTKChung.Name = "btnTKChung";
+            this.btnTKChung.Size = new System.Drawing.Size(46, 27);
+            this.btnTKChung.TabIndex = 4;
+            this.btnTKChung.Text = "Xem";
+            this.btnTKChung.UseVisualStyleBackColor = true;
+            // 
+            // cbbTinhNgay
+            // 
+            this.cbbTinhNgay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbbTinhNgay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbTinhNgay.FormattingEnabled = true;
+            this.cbbTinhNgay.Location = new System.Drawing.Point(239, 6);
+            this.cbbTinhNgay.Name = "cbbTinhNgay";
+            this.cbbTinhNgay.Size = new System.Drawing.Size(617, 21);
+            this.cbbTinhNgay.TabIndex = 3;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(204, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Của:";
+            // 
+            // dtpIn
+            // 
+            this.dtpIn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpIn.CustomFormat = "yyyy-MM-dd";
+            this.dtpIn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpIn.Location = new System.Drawing.Point(49, 6);
+            this.dtpIn.Name = "dtpIn";
+            this.dtpIn.Size = new System.Drawing.Size(110, 20);
+            this.dtpIn.TabIndex = 1;
             // 
             // label4
             // 
@@ -171,52 +209,18 @@ namespace _1760081.Forms.manager
             this.label4.TabIndex = 0;
             this.label4.Text = "Ngày:";
             // 
-            // dtpIn
+            // reportViewer1
             // 
-            this.dtpIn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpIn.CustomFormat = "yyyy-MM-dd";
-            this.dtpIn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpIn.Location = new System.Drawing.Point(49, 6);
-            this.dtpIn.Name = "dtpIn";
-            this.dtpIn.Size = new System.Drawing.Size(287, 20);
-            this.dtpIn.TabIndex = 1;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 35);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Của:";
-            // 
-            // cbbTinhNgay
-            // 
-            this.cbbTinhNgay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbbTinhNgay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbbTinhNgay.FormattingEnabled = true;
-            this.cbbTinhNgay.Location = new System.Drawing.Point(49, 32);
-            this.cbbTinhNgay.Name = "cbbTinhNgay";
-            this.cbbTinhNgay.Size = new System.Drawing.Size(287, 21);
-            this.cbbTinhNgay.TabIndex = 3;
-            // 
-            // btnTKChung
-            // 
-            this.btnTKChung.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnTKChung.Location = new System.Drawing.Point(134, 59);
-            this.btnTKChung.Name = "btnTKChung";
-            this.btnTKChung.Size = new System.Drawing.Size(75, 23);
-            this.btnTKChung.TabIndex = 4;
-            this.btnTKChung.Text = "Xem";
-            this.btnTKChung.UseVisualStyleBackColor = true;
+            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
+            this.reportViewer1.Name = "ReportViewer";
+            this.reportViewer1.Size = new System.Drawing.Size(400, 250);
+            this.reportViewer1.TabIndex = 0;
             // 
             // FormThongKe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(352, 141);
+            this.ClientSize = new System.Drawing.Size(919, 422);
             this.Controls.Add(this.tabControl1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -249,5 +253,6 @@ namespace _1760081.Forms.manager
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtpIn;
         private System.Windows.Forms.Label label4;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }

@@ -29,6 +29,7 @@ namespace _1760081.Forms.manager
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,11 +45,12 @@ namespace _1760081.Forms.manager
             this.label5 = new System.Windows.Forms.Label();
             this.dtpIn = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -157,7 +159,7 @@ namespace _1760081.Forms.manager
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(911, 33);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Thống kê chung theo ngày";
+            this.tabPage2.Text = "Thống kê người nhiễm theo ngày";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // btnTKChung
@@ -210,14 +212,6 @@ namespace _1760081.Forms.manager
             this.label4.TabIndex = 0;
             this.label4.Text = "Ngày:";
             // 
-            // reportViewer1
-            // 
-            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(400, 250);
-            this.reportViewer1.TabIndex = 0;
-            // 
             // reportViewer
             // 
             this.reportViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -229,6 +223,10 @@ namespace _1760081.Forms.manager
             this.reportViewer.Size = new System.Drawing.Size(919, 364);
             this.reportViewer.TabIndex = 2;
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // FormThongKe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -236,18 +234,16 @@ namespace _1760081.Forms.manager
             this.ClientSize = new System.Drawing.Size(919, 422);
             this.Controls.Add(this.reportViewer);
             this.Controls.Add(this.tabControl1);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(223, 179);
             this.Name = "FormThongKe";
             this.ShowIcon = false;
             this.Text = "Xem thống kê";
-            this.Load += new System.EventHandler(this.FormThongKe_Load_1);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -268,7 +264,7 @@ namespace _1760081.Forms.manager
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtpIn;
         private System.Windows.Forms.Label label4;
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

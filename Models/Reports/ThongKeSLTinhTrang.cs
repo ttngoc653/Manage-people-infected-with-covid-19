@@ -1,21 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace _1760081.Models.Reports
+namespace _1760081.Models
 {
-    public class ThongKeSLTinhTrang
+    internal class ThongKeSLTinhTrang
     {
-        public string STenDiaPhuong { get; set; }
-        public int LSoLuongAmTinh { get; set; }
-        public int LSoLuongF3 { get; set; }
-        public int LSoLuongF2 { get; set; }
-        public int LSoLuongF1 { get; set; }
-        public int LSoLuongF0 { get; set; }
-        public int LSoLuongTuVong { get; set; }
-        public int LTongSoCaNhiemHienTai { get; set; }
+        public ThongKeSLTinhTrang ()
+        {
+            STenDiaPhuong = null;
+            LTongSoCaNhiemHienTai = 0;
+            LSoLuongAmTinh = 0;
+            LSoLuongF3 = 0;
+            LSoLuongF2 = 0;
+            LSoLuongF1 = 0;
+            LSoLuongF0 = 0;
+            LSoLuongTuVong = 0;
+        }
+        public string STenDiaPhuong { get; internal set; }
+        public int LTongSoCaNhiemHienTai { get; internal set; }
+        public int LSoLuongAmTinh { get; internal set; }
+        public int LSoLuongF3 { get; internal set; }
+        public int LSoLuongF2 { get; internal set; }
+        public int LSoLuongF1 { get; internal set; }
+        public int LSoLuongF0 { get; internal set; }
+        public int LSoLuongTuVong { get; internal set; }
+    }
 
+    internal class DataTableTKSLTinhTrang
+    {
+        public static List<ThongKeSLTinhTrang> GetList { get; set; }
     }
 }

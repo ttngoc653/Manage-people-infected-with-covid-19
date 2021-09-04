@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <IntermediateOutputPath>C:\Users\Zitch\AppData\Local\Temp\vs1DD1.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,6 +47,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <IntermediateOutputPath>C:\Users\Zitch\AppData\Local\Temp\vs1DD1.tmp\Release\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -206,7 +208,8 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Utils\MaHoa.cs" />
-    <Compile Include="_1760081\Models\ThongKeSLTinhTrang.cs" />
+    <Compile Include="Models\Reports\ThongKeSLCaNhiem.cs" />
+    <Compile Include="Models\Reports\ThongKeSLTinhTrang.cs" />
     <EmbeddedResource Include="Forms\admin\FormQuanLyNoiDieuTriCachLy.resx">
       <DependentUpon>FormQuanLyNoiDieuTriCachLy.cs</DependentUpon>
     </EmbeddedResource>
@@ -237,7 +240,12 @@
     <EmbeddedResource Include="Forms\manager\FormThongKe.resx">
       <DependentUpon>FormThongKe.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\manager\report\ReportThongKeTinhTrang.rdlc" />
+    <None Include="Forms\manager\report\ReportThongKeNguoiNhiemTheoNgay.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Forms\manager\report\ReportThongKeTinhTrang.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -258,6 +266,7 @@
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\_1760081.Models.District.datasource" />
+    <None Include="Properties\DataSources\_1760081.Models.ThongKeSLCaNhiem.datasource" />
     <None Include="Properties\DataSources\_1760081.Models.ThongKeSLTinhTrang.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -309,4 +318,8 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /y $(ProjectDir)Forms\manager\report\*.rdlc  $(ProjectDir)$(OutDir)
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>

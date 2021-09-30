@@ -74,6 +74,7 @@ namespace _1760081.Forms.admin
                 {
                     MessageBox.Show ("Da tao tai khoan thanh cong.");
                     Controllers.CtrlTaiKhoan.GhiNhatKy(g_sUsername, "Tao tai khoan " + txtUsername.Text.Trim());
+                    LoadDanhSachTaiKhoan();
                 }
                 else
                 {

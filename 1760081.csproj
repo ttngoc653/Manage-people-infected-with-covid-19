@@ -319,7 +319,7 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y $(ProjectDir)Forms\manager\report\*.rdlc  $(ProjectDir)$(OutDir)
+    <PostBuildEvent>xcopy /y "$(ProjectDir)Forms\manager\report\*.rdlc" "$(ProjectDir)$(OutDir)"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

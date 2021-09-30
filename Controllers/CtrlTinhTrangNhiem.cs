@@ -27,7 +27,14 @@ namespace _1760081.Controllers
 
             using (QLTTCovid19Entities entity=new QLTTCovid19Entities())
             {
-                result = entity.LichSuTinhTrangNhiems.Min(obj => obj.ThoiGianCapNhat);
+                if (entity.LichSuTinhTrangNhiems.Count()==0)
+                {
+                    result = DateTime.Now;
+                }
+                else
+                {
+                    result = entity.LichSuTinhTrangNhiems.Min(obj => obj.ThoiGianCapNhat);
+                }
             }
 
             return result;
